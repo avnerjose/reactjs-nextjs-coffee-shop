@@ -314,6 +314,13 @@ export type GetFilterValuesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetFilterValuesQuery = { __typename?: 'Query', allProducts: { __typename?: 'ProductConnectionConnection', edges?: Array<{ __typename?: 'ProductConnectionEdge', node: { __typename?: 'Product', brand?: string | null, weight?: number | null, coffee_strength?: number | null } } | null> | null } };
 
+export type GetProductBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type GetProductBySlugQuery = { __typename?: 'Query', product?: { __typename?: 'Product', name?: string | null, price?: number | null, description?: any | null, category?: string | null, taste?: string | null, rating?: number | null, image?: any | null, coffee_strength?: number | null, weight?: number | null, origin?: string | null, _meta: { __typename?: 'Meta', id: string, uid?: string | null } } | null };
+
 export type GetProductsWithFilterQueryVariables = Exact<{
   brand?: InputMaybe<Scalars['String']>;
   weight?: InputMaybe<Scalars['Float']>;
@@ -411,6 +418,54 @@ export function useGetFilterValuesLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetFilterValuesQueryHookResult = ReturnType<typeof useGetFilterValuesQuery>;
 export type GetFilterValuesLazyQueryHookResult = ReturnType<typeof useGetFilterValuesLazyQuery>;
 export type GetFilterValuesQueryResult = Apollo.QueryResult<GetFilterValuesQuery, GetFilterValuesQueryVariables>;
+export const GetProductBySlugDocument = gql`
+    query GetProductBySlug($slug: String!) {
+  product(uid: $slug, lang: "en-us") {
+    _meta {
+      id
+      uid
+    }
+    name
+    price
+    description
+    category
+    taste
+    rating
+    image
+    coffee_strength
+    weight
+    origin
+  }
+}
+    `;
+
+/**
+ * __useGetProductBySlugQuery__
+ *
+ * To run a query within a React component, call `useGetProductBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useGetProductBySlugQuery(baseOptions: Apollo.QueryHookOptions<GetProductBySlugQuery, GetProductBySlugQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProductBySlugQuery, GetProductBySlugQueryVariables>(GetProductBySlugDocument, options);
+      }
+export function useGetProductBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductBySlugQuery, GetProductBySlugQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProductBySlugQuery, GetProductBySlugQueryVariables>(GetProductBySlugDocument, options);
+        }
+export type GetProductBySlugQueryHookResult = ReturnType<typeof useGetProductBySlugQuery>;
+export type GetProductBySlugLazyQueryHookResult = ReturnType<typeof useGetProductBySlugLazyQuery>;
+export type GetProductBySlugQueryResult = Apollo.QueryResult<GetProductBySlugQuery, GetProductBySlugQueryVariables>;
 export const GetProductsWithFilterDocument = gql`
     query GetProductsWithFilter($brand: String, $weight: Float, $coffeeStrength: Float, $priceMin: Float, $priceMax: Float) {
   allProducts(

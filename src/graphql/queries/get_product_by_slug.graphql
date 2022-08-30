@@ -1,0 +1,18 @@
+query GetProductBySlug($slug: String!) {
+  product(uid: $slug, lang: "en-us") {
+    _meta {
+      id
+      uid
+    }
+    name
+    price
+    description
+    category
+    taste
+    rating
+    image
+    coffee_strength
+    weight
+    origin
+  }
+}

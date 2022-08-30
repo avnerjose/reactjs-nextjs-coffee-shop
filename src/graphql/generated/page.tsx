@@ -77,6 +77,41 @@ export const ssrGetFilterValues = {
       withPage: withPageGetFilterValues,
       usePage: useGetFilterValues,
     }
+export async function getServerPageGetProductBySlug
+    (options: Omit<Apollo.QueryOptions<Types.GetProductBySlugQueryVariables>, 'query'>, ctx: ApolloClientContext ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.GetProductBySlugQuery>({ ...options, query: Operations.GetProductBySlugDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useGetProductBySlug = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.GetProductBySlugQuery, Types.GetProductBySlugQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetProductBySlugDocument, options);
+};
+export type PageGetProductBySlugComp = React.FC<{data?: Types.GetProductBySlugQuery, error?: Apollo.ApolloError}>;
+export const withPageGetProductBySlug = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.GetProductBySlugQuery, Types.GetProductBySlugQueryVariables>) => (WrappedComponent:PageGetProductBySlugComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.GetProductBySlugDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrGetProductBySlug = {
+      getServerPage: getServerPageGetProductBySlug,
+      withPage: withPageGetProductBySlug,
+      usePage: useGetProductBySlug,
+    }
 export async function getServerPageGetProductsWithFilter
     (options: Omit<Apollo.QueryOptions<Types.GetProductsWithFilterQueryVariables>, 'query'>, ctx: ApolloClientContext ){
         const apolloClient = getApolloClient(ctx);
