@@ -1,0 +1,11 @@
+query GetFilterValues {
+  allProducts {
+    edges {
+      node {
+        brand
+        weight
+        coffee_strength 
+         }
+    }
+  }
+}

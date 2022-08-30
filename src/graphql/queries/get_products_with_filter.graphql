@@ -1,0 +1,30 @@
+query GetProductsWithFilter(
+  $brand: String
+  $weight: Float
+  $coffeeStrength: Float
+  $priceMin: Float
+  $priceMax: Float
+) {
+  allProducts(
+    where: {
+      brand: $brand
+      weight: $weight
+      coffee_strength: $coffeeStrength
+      price_lt: $priceMax
+      price_gt: $priceMin
+    }
+  ) {
+    edges {
+      node {
+        name
+        price
+        category
+        image
+        _meta {
+          uid
+          id
+        }
+      }
+    }
+  }
+}

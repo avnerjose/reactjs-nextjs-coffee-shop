@@ -1,0 +1,16 @@
+query GetAllProducts {
+  allProducts {
+    edges {
+      node {
+        name
+        price
+        category
+        image
+        _meta{
+          id
+          uid
+        }
+      }
+    }
+  }
+}
