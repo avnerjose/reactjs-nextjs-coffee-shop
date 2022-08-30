@@ -1,0 +1,97 @@
+{
+  "id": "product",
+  "label": "Product",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "slug",
+          "placeholder": ""
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "name",
+          "placeholder": ""
+        }
+      },
+      "price": {
+        "type": "Number",
+        "config": {
+          "label": "price",
+          "placeholder": ""
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "category": {
+        "type": "Text",
+        "config": {
+          "label": "category",
+          "placeholder": ""
+        }
+      },
+      "brand": {
+        "type": "Text",
+        "config": {
+          "label": "brand",
+          "placeholder": ""
+        }
+      },
+      "taste": {
+        "type": "Text",
+        "config": {
+          "label": "taste",
+          "placeholder": ""
+        }
+      },
+      "rating": {
+        "type": "Number",
+        "config": {
+          "label": "rating",
+          "placeholder": ""
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "coffee_strength": {
+        "type": "Number",
+        "config": {
+          "label": "coffee_strength",
+          "placeholder": ""
+        }
+      },
+      "weight": {
+        "type": "Number",
+        "config": {
+          "label": "weight",
+          "placeholder": ""
+        }
+      },
+      "origin": {
+        "type": "Text",
+        "config": {
+          "label": "origin",
+          "placeholder": ""
+        }
+      }
+    }
+  }
+}
