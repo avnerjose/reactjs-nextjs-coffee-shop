@@ -1,5 +1,6 @@
+import { PrismicRichText } from "@prismicio/react";
 import { GetServerSideProps, NextPage } from "next";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Footer, Header, StarRating } from "../../components";
 import { GetProductBySlugQuery } from "../../graphql/generated/graphql";
 import { ssrGetProductBySlug } from "../../graphql/generated/page";
@@ -19,8 +20,11 @@ const Product: NextPage<ProductProps> = ({ data }) => {
     }
     setAmount(parseInt(e.target.value));
   };
+  const product = {
+    ...data?.product,
+    coffeeStrength: data?.product?.coffee_strength || 0,
+  };
 
-  const product = data?.products[0];
   return (
     <>
       <Header />
@@ -35,11 +39,12 @@ const Product: NextPage<ProductProps> = ({ data }) => {
           </div>
           <div className="flex flex-col gap-3 max-w-2xl">
             <h2 className="font-title text-2xl">{product?.name}</h2>
-            <StarRating rating={data?.products[0]?.rating || 0} />
+            <StarRating rating={product.rating || 0} />
             <span className="uppercase text-sm text-gray-400">
               {product?.category}
             </span>
-            <p>{product?.description}</p>
+            <PrismicRichText field={product.description} />
+            {/* <p>{product?.description}</p> */}
             <div className="flex flex-col gap-3">
               <div>
                 <span>Coffee Strength:</span>
@@ -75,6 +80,7 @@ const Product: NextPage<ProductProps> = ({ data }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { slug } = ctx.query;
+
   return await ssrGetProductBySlug.getServerPage(
     {
       variables: {

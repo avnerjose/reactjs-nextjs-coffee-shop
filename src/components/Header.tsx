@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useScroll } from "../hooks/useScroll";
 import { ShoppingCart } from "phosphor-react";
+import { useFilter } from "../hooks/useFilter";
+import { useRouter } from "next/router";
 
 interface HeaderProps {
   isFixed?: boolean;
@@ -10,7 +12,9 @@ interface HeaderProps {
 
 export function Header({ isFixed = false }: HeaderProps) {
   const [isHeaderTransparent, setIsHeaderTransparent] = useState(isFixed);
+  const { asPath } = useRouter();
   const { setSectionToScroll } = useScroll();
+  const { search, setSearch } = useFilter();
 
   function detectScroll() {
     if (!isFixed) return;
@@ -51,9 +55,21 @@ export function Header({ isFixed = false }: HeaderProps) {
           </NextLink>
           <NextLink href="/catalog">Catalog</NextLink>
         </nav>
-        <NextLink href="/cart">
-          <ShoppingCart className="text-xl cursor-pointer text-white" />
-        </NextLink>
+        <div className="flex items-center gap-2 ">
+          {asPath === "/catalog" && (
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="rounded-sm outline-none p-1 placeholder:text-sm"
+              type="text"
+              placeholder="Search for products here"
+
+            />
+          )}
+          <NextLink href="/cart">
+            <ShoppingCart className="text-xl cursor-pointer text-white" />
+          </NextLink>
+        </div>
       </div>
     </header>
   );

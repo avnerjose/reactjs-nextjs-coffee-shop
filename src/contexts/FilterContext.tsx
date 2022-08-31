@@ -7,7 +7,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useGetProductsWithFilterLazyQuery } from "../graphql/generated/graphql";
+import {
+  useGetAllProductsWithSearchLazyQuery,
+  useGetProductsWithFilterLazyQuery,
+} from "../graphql/generated/graphql";
 
 type Product = {
   id: string;
@@ -34,7 +37,9 @@ interface FilterContextProps {
   priceLimits: PriceLimits;
   brand: string | null;
   coffeeStrength: number | null;
+  search: string;
   weight: number | null;
+  setSearch: Dispatch<SetStateAction<string>>;
   setPriceLimits: Dispatch<SetStateAction<PriceLimits>>;
   setBrand: Dispatch<SetStateAction<string | null>>;
   setCoffeeStrength: Dispatch<SetStateAction<number | null>>;
@@ -47,7 +52,12 @@ const FilterContext = createContext<FilterContextProps>(
 
 function FilterProvider({ children }: FilterProviderProps) {
   const [getProductsWithFilter, { data }] = useGetProductsWithFilterLazyQuery();
+  const [
+    getProductsWithSearch,
+    { data: productsWithSearchData },
+  ] = useGetAllProductsWithSearchLazyQuery();
   const [products, setProducts] = useState<Product[]>([]);
+  const [search, setSearch] = useState("");
   const [brand, setBrand] = useState<string | null>(null);
   const [coffeeStrength, setCoffeeStrength] = useState<number | null>(null);
   const [weight, setWeight] = useState<number | null>(null);
@@ -84,6 +94,30 @@ function FilterProvider({ children }: FilterProviderProps) {
       );
   }, [data]);
 
+  useEffect(() => {
+    productsWithSearchData &&
+      setProducts(
+        productsWithSearchData?.allProducts?.edges?.map((edge) => ({
+          id: String(edge?.node._meta.id),
+          slug: String(edge?.node._meta.uid),
+          name: String(edge?.node.name),
+          image: {
+            url: String(edge?.node.image.url),
+          },
+          category: String(edge?.node.category),
+          price: Number(edge?.node.price),
+        })) ?? []
+      );
+  }, [productsWithSearchData]);
+
+  useEffect(() => {
+    getProductsWithSearch({
+      variables: {
+        search,
+      },
+    });
+  }, [search]);
+
   return (
     <FilterContext.Provider
       value={{
@@ -92,10 +126,12 @@ function FilterProvider({ children }: FilterProviderProps) {
         brand,
         coffeeStrength,
         weight,
+        search,
         setPriceLimits,
         setBrand,
         setCoffeeStrength,
         setWeight,
+        setSearch,
       }}
     >
       {children}

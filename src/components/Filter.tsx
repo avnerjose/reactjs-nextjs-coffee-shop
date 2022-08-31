@@ -38,6 +38,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
     setBrand,
     setCoffeeStrength,
     setWeight,
+    setSearch,
   } = useFilter();
 
   const handleFilterValues = () => {
@@ -72,6 +73,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
     setCoffeeStrength(null);
     setWeight(null);
     setSelectedPrice(null);
+    setSearch("");
   };
 
   useEffect(() => {
@@ -81,7 +83,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
   return (
     <aside
       className={classNames(
-        "absolute z-10 md:static flex flex-col gap-3 bg-dark p-8 text-white min-h-[calc(100vh-3.5rem)] shadow-md",
+        "absolute z-10 md:static flex flex-col gap-3 bg-dark px-8 py-6 text-white min-h-[calc(100vh-3.5rem)] shadow-md",
         {
           "p-2": isMobile && !isOpen,
         }

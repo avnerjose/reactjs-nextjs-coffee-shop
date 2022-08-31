@@ -25,7 +25,7 @@ export function ScrollProvider({ children }: ScrollProviderProps) {
     });
     setSectionToScroll("");
   };
-
+  
   useEffect(() => {
     if (asPath === "/" && sectionToScroll) {
       handleScrollToSection();
