@@ -5,7 +5,7 @@ query GetFilterValues {
         brand
         weight
         coffee_strength 
-         }
+        }
     }
   }
 }

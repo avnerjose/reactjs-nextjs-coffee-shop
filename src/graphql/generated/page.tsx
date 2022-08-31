@@ -147,3 +147,38 @@ export const ssrGetProductsWithFilter = {
       withPage: withPageGetProductsWithFilter,
       usePage: useGetProductsWithFilter,
     }
+export async function getServerPageGetAllProductsWithSearch
+    (options: Omit<Apollo.QueryOptions<Types.GetAllProductsWithSearchQueryVariables>, 'query'>, ctx: ApolloClientContext ){
+        const apolloClient = getApolloClient(ctx);
+        
+        const data = await apolloClient.query<Types.GetAllProductsWithSearchQuery>({ ...options, query: Operations.GetAllProductsWithSearchDocument });
+        
+        const apolloState = apolloClient.cache.extract();
+
+        return {
+            props: {
+                apolloState: apolloState,
+                data: data?.data,
+                error: data?.error ?? data?.errors ?? null,
+            },
+        };
+      }
+export const useGetAllProductsWithSearch = (
+  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.GetAllProductsWithSearchQuery, Types.GetAllProductsWithSearchQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(Operations.GetAllProductsWithSearchDocument, options);
+};
+export type PageGetAllProductsWithSearchComp = React.FC<{data?: Types.GetAllProductsWithSearchQuery, error?: Apollo.ApolloError}>;
+export const withPageGetAllProductsWithSearch = (optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.GetAllProductsWithSearchQuery, Types.GetAllProductsWithSearchQueryVariables>) => (WrappedComponent:PageGetAllProductsWithSearchComp) : NextPage  => (props) => {
+                const router = useRouter()
+                const options = optionsFunc ? optionsFunc(router) : {};
+                const {data, error } = useQuery(Operations.GetAllProductsWithSearchDocument, options)    
+                return <WrappedComponent {...props} data={data} error={error} /> ;
+                   
+            }; 
+export const ssrGetAllProductsWithSearch = {
+      getServerPage: getServerPageGetAllProductsWithSearch,
+      withPage: withPageGetAllProductsWithSearch,
+      usePage: useGetAllProductsWithSearch,
+    }

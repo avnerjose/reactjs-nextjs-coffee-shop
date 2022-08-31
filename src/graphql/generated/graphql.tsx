@@ -332,6 +332,13 @@ export type GetProductsWithFilterQueryVariables = Exact<{
 
 export type GetProductsWithFilterQuery = { __typename?: 'Query', allProducts: { __typename?: 'ProductConnectionConnection', edges?: Array<{ __typename?: 'ProductConnectionEdge', node: { __typename?: 'Product', name?: string | null, price?: number | null, category?: string | null, image?: any | null, _meta: { __typename?: 'Meta', uid?: string | null, id: string } } } | null> | null } };
 
+export type GetAllProductsWithSearchQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetAllProductsWithSearchQuery = { __typename?: 'Query', allProducts: { __typename?: 'ProductConnectionConnection', edges?: Array<{ __typename?: 'ProductConnectionEdge', node: { __typename?: 'Product', name?: string | null, price?: number | null, category?: string | null, image?: any | null, _meta: { __typename?: 'Meta', id: string, uid?: string | null } } } | null> | null } };
+
 
 export const GetAllProductsDocument = gql`
     query GetAllProducts {
@@ -518,3 +525,49 @@ export function useGetProductsWithFilterLazyQuery(baseOptions?: Apollo.LazyQuery
 export type GetProductsWithFilterQueryHookResult = ReturnType<typeof useGetProductsWithFilterQuery>;
 export type GetProductsWithFilterLazyQueryHookResult = ReturnType<typeof useGetProductsWithFilterLazyQuery>;
 export type GetProductsWithFilterQueryResult = Apollo.QueryResult<GetProductsWithFilterQuery, GetProductsWithFilterQueryVariables>;
+export const GetAllProductsWithSearchDocument = gql`
+    query GetAllProductsWithSearch($search: String) {
+  allProducts(fulltext: $search) {
+    edges {
+      node {
+        name
+        price
+        category
+        image
+        _meta {
+          id
+          uid
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllProductsWithSearchQuery__
+ *
+ * To run a query within a React component, call `useGetAllProductsWithSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllProductsWithSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllProductsWithSearchQuery({
+ *   variables: {
+ *      search: // value for 'search'
+ *   },
+ * });
+ */
+export function useGetAllProductsWithSearchQuery(baseOptions?: Apollo.QueryHookOptions<GetAllProductsWithSearchQuery, GetAllProductsWithSearchQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllProductsWithSearchQuery, GetAllProductsWithSearchQueryVariables>(GetAllProductsWithSearchDocument, options);
+      }
+export function useGetAllProductsWithSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllProductsWithSearchQuery, GetAllProductsWithSearchQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllProductsWithSearchQuery, GetAllProductsWithSearchQueryVariables>(GetAllProductsWithSearchDocument, options);
+        }
+export type GetAllProductsWithSearchQueryHookResult = ReturnType<typeof useGetAllProductsWithSearchQuery>;
+export type GetAllProductsWithSearchLazyQueryHookResult = ReturnType<typeof useGetAllProductsWithSearchLazyQuery>;
+export type GetAllProductsWithSearchQueryResult = Apollo.QueryResult<GetAllProductsWithSearchQuery, GetAllProductsWithSearchQueryVariables>;

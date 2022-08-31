@@ -1,0 +1,16 @@
+query GetAllProductsWithSearch($search: String) {
+  allProducts(fulltext: $search) {
+    edges {
+      node {
+        name
+        price
+        category
+        image
+        _meta {
+          id
+          uid
+        }
+      }
+    }
+  }
+}
