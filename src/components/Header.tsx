@@ -1,9 +1,8 @@
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-import { useScroll } from "../hooks/useScroll";
+import { useScroll, useCart, useFilter } from "../hooks";
 import { ShoppingCart } from "phosphor-react";
-import { useFilter } from "../hooks/useFilter";
 import { useRouter } from "next/router";
 
 interface HeaderProps {
@@ -15,6 +14,7 @@ export function Header({ isFixed = false }: HeaderProps) {
   const { asPath } = useRouter();
   const { setSectionToScroll } = useScroll();
   const { search, setSearch } = useFilter();
+  const { totalProductsAmount } = useCart();
 
   function detectScroll() {
     if (!isFixed) return;
@@ -63,11 +63,17 @@ export function Header({ isFixed = false }: HeaderProps) {
               className="rounded-sm outline-none p-1 placeholder:text-sm"
               type="text"
               placeholder="Search for products here"
-
             />
           )}
           <NextLink href="/cart">
-            <ShoppingCart className="text-xl cursor-pointer text-white" />
+            <div className="relative cursor-pointer">
+              <ShoppingCart className="text-xl  text-white" />
+              {totalProductsAmount > 0 && (
+                <span className="flex items-center justify-center absolute top-[-0.8rem] right-[-0.8rem] text-sm bg-red-500 text-white rounded-full w-5 h-5">
+                  {totalProductsAmount}
+                </span>
+              )}
+            </div>
           </NextLink>
         </div>
       </div>
