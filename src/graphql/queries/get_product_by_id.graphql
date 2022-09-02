@@ -1,0 +1,18 @@
+query GetProductById($id: String) {
+  allProducts(id: $id) {
+    edges {
+      node {
+        _meta {
+          id
+          uid
+        }
+        name
+        price
+        small_description
+        category
+        rating
+        image
+      }
+    }
+  }
+}

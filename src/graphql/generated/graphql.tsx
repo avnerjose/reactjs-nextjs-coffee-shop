@@ -64,6 +64,7 @@ export type Product = _Document & _Linkable & {
   origin?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Float']>;
   rating?: Maybe<Scalars['Float']>;
+  small_description?: Maybe<Scalars['String']>;
   taste?: Maybe<Scalars['String']>;
   weight?: Maybe<Scalars['Float']>;
 };
@@ -189,6 +190,8 @@ export enum SortProducty {
   PriceDesc = 'price_DESC',
   RatingAsc = 'rating_ASC',
   RatingDesc = 'rating_DESC',
+  SmallDescriptionAsc = 'small_description_ASC',
+  SmallDescriptionDesc = 'small_description_DESC',
   TasteAsc = 'taste_ASC',
   TasteDesc = 'taste_DESC',
   WeightAsc = 'weight_ASC',
@@ -230,6 +233,8 @@ export type WhereProduct = {
   rating_lt?: InputMaybe<Scalars['Float']>;
   /** rating */
   rating_range?: InputMaybe<Array<Scalars['Float']>>;
+  small_description?: InputMaybe<Scalars['String']>;
+  small_description_fulltext?: InputMaybe<Scalars['String']>;
   taste?: InputMaybe<Scalars['String']>;
   taste_fulltext?: InputMaybe<Scalars['String']>;
   /** weight */
@@ -313,6 +318,13 @@ export type GetFilterValuesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetFilterValuesQuery = { __typename?: 'Query', allProducts: { __typename?: 'ProductConnectionConnection', edges?: Array<{ __typename?: 'ProductConnectionEdge', node: { __typename?: 'Product', brand?: string | null, weight?: number | null, coffee_strength?: number | null } } | null> | null } };
+
+export type GetProductByIdQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetProductByIdQuery = { __typename?: 'Query', allProducts: { __typename?: 'ProductConnectionConnection', edges?: Array<{ __typename?: 'ProductConnectionEdge', node: { __typename?: 'Product', name?: string | null, price?: number | null, small_description?: string | null, category?: string | null, rating?: number | null, image?: any | null, _meta: { __typename?: 'Meta', id: string, uid?: string | null } } } | null> | null } };
 
 export type GetProductBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -425,6 +437,54 @@ export function useGetFilterValuesLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetFilterValuesQueryHookResult = ReturnType<typeof useGetFilterValuesQuery>;
 export type GetFilterValuesLazyQueryHookResult = ReturnType<typeof useGetFilterValuesLazyQuery>;
 export type GetFilterValuesQueryResult = Apollo.QueryResult<GetFilterValuesQuery, GetFilterValuesQueryVariables>;
+export const GetProductByIdDocument = gql`
+    query GetProductById($id: String) {
+  allProducts(id: $id) {
+    edges {
+      node {
+        _meta {
+          id
+          uid
+        }
+        name
+        price
+        small_description
+        category
+        rating
+        image
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProductByIdQuery__
+ *
+ * To run a query within a React component, call `useGetProductByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetProductByIdQuery(baseOptions?: Apollo.QueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
+      }
+export function useGetProductByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
+        }
+export type GetProductByIdQueryHookResult = ReturnType<typeof useGetProductByIdQuery>;
+export type GetProductByIdLazyQueryHookResult = ReturnType<typeof useGetProductByIdLazyQuery>;
+export type GetProductByIdQueryResult = Apollo.QueryResult<GetProductByIdQuery, GetProductByIdQueryVariables>;
 export const GetProductBySlugDocument = gql`
     query GetProductBySlug($slug: String!) {
   product(uid: $slug, lang: "en-us") {
