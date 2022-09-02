@@ -91,6 +91,13 @@
           "label": "origin",
           "placeholder": ""
         }
+      },
+      "small_description": {
+        "type": "Text",
+        "config": {
+          "label": "small_description",
+          "placeholder": ""
+        }
       }
     }
   }
