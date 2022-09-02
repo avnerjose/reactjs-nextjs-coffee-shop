@@ -7,7 +7,7 @@ import {
   getServerPageGetAllProducts,
   ssrGetAllProducts,
 } from "../graphql/generated/page";
-import { useFilter } from "../hooks/useFilter";
+import { useFilter } from "../hooks";
 
 type CatalogProps = {
   data: GetAllProductsQuery;

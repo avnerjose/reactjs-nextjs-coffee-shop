@@ -3,7 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useGetFilterValuesQuery } from "../graphql/generated/graphql";
-import { useFilter } from "../hooks/useFilter";
+import { useFilter } from "../hooks";
 
 interface FilterProps {
   isOpen: boolean;
