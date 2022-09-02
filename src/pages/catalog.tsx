@@ -8,7 +8,6 @@ import {
   ssrGetAllProducts,
 } from "../graphql/generated/page";
 import { useFilter } from "../hooks/useFilter";
-import { withApollo } from "../lib/Apollo/withApollo";
 
 type CatalogProps = {
   data: GetAllProductsQuery;
@@ -47,6 +46,4 @@ const Catalog: NextPage<CatalogProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) =>
   getServerPageGetAllProducts({}, ctx);
 
-export default withApollo(
-  ssrGetAllProducts.withPage()(withFilter(Catalog as any))
-);
+export default ssrGetAllProducts.withPage()(withFilter(Catalog as any));

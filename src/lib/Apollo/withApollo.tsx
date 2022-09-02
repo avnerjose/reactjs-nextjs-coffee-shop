@@ -1,16 +1,15 @@
 import {
   ApolloClient,
   ApolloProvider,
-  createHttpLink,
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
-import { GetServerSidePropsContext, NextPage } from "next";
+import { GetServerSidePropsContext } from "next";
 import { repositoryName } from "../../../prismicio";
 import * as prismic from "@prismicio/client";
 import { createPrismicLink } from "apollo-link-prismic";
 
-export const withApollo = (Component: NextPage) => {
+export const withApollo = (Component: any) => {
   return function Provider(props: any) {
     return (
       <ApolloProvider client={getApolloClient(undefined, props.apolloState)}>
