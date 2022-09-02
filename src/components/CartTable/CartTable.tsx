@@ -1,6 +1,8 @@
+import { useCart } from "../../hooks/useCart";
 import { CartTableItem } from "./CartTableItem";
 
 export function CartTable() {
+  const { products } = useCart();
   return (
     <table className="w-full max-w-screen-lg mx-auto">
       <thead>
@@ -14,8 +16,9 @@ export function CartTable() {
         </tr>
       </thead>
       <tbody>
-        <CartTableItem />
-        <CartTableItem />
+        {products.map((product) => (
+          <CartTableItem key={product.id} product={product} />
+        ))}
       </tbody>
     </table>
   );

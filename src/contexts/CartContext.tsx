@@ -14,14 +14,16 @@ type Product = {
   };
   price: number;
   category: string;
+  smallDescription: string;
   amount: number;
 };
 
 interface CartContextProps {
+  totalProductsAmount: number;
+  products: Product[];
   addProductToCart: (productId: string, amount?: number) => Promise<void>;
   removeProductFromCart: (productId: string) => void;
   updateProductAmount: (productId: string, amount: number) => void;
-  totalProductsAmount: number;
 }
 
 export const CartContext = createContext<CartContextProps>(
@@ -64,6 +66,7 @@ function CartProvider({ children }: CartProviderProps) {
         image: {
           url: String(apiProduct?.image.url),
         },
+        smallDescription: String(apiProduct?.small_description),
         price: Number(apiProduct?.price),
         amount,
       };
@@ -116,6 +119,7 @@ function CartProvider({ children }: CartProviderProps) {
         removeProductFromCart,
         updateProductAmount,
         totalProductsAmount,
+        products,
       }}
     >
       {children}
