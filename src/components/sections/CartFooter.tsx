@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { useCart } from "../../hooks";
 import { formatToCurrency } from "../../utils/format_money";
 
 export function CartFooter() {
+  const { shippingPrice, totalProductsPrice } = useCart();
+
   return (
     <footer className="bg-brown-500">
       <div className="flex items-center justify-between max-w-screen-xl mx-auto p-8 gap-4 text-white">
@@ -13,16 +16,18 @@ export function CartFooter() {
         <div className="flex items-center justify-center gap-5">
           <div className="flex flex-col text-gray-100">
             <span>Subtotal</span>
-            <span className="text-lg">{formatToCurrency(20)}</span>
+            <span className="text-lg">
+              {formatToCurrency(totalProductsPrice)}
+            </span>
           </div>
           <div className="flex flex-col text-gray-100">
             <span>Shipping</span>
-            <span className="text-lg">{formatToCurrency(5)}</span>
+            <span className="text-lg">{formatToCurrency(shippingPrice)}</span>
           </div>
           <div className="flex flex-col">
             <span className="font-bold">Total</span>
             <span className="text-lg font-bold">
-              {formatToCurrency(20 + 5)}
+              {formatToCurrency(totalProductsPrice + shippingPrice)}
             </span>
           </div>
           <Link href="/checkout">

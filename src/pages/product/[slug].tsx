@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { Footer, Header, StarRating } from "../../components";
 import { GetProductBySlugQuery } from "../../graphql/generated/graphql";
 import { ssrGetProductBySlug } from "../../graphql/generated/page";
+import { useCart } from "../../hooks";
 import { withApollo } from "../../lib/Apollo/withApollo";
 
 type ProductProps = {
@@ -12,14 +13,17 @@ type ProductProps = {
 
 const Product: NextPage<ProductProps> = ({ data }) => {
   const [amount, setAmount] = useState(1);
+  const { addProductToCart } = useCart();
 
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (parseInt(e.target.value) < 1) {
       setAmount(1);
       return;
     }
+
     setAmount(parseInt(e.target.value));
   };
+
   const product = {
     ...data?.product,
     coffeeStrength: data?.product?.coffee_strength || 0,
@@ -44,7 +48,6 @@ const Product: NextPage<ProductProps> = ({ data }) => {
               {product?.category}
             </span>
             <PrismicRichText field={product.description} />
-            {/* <p>{product?.description}</p> */}
             <div className="flex flex-col gap-3">
               <div>
                 <span>Coffee Strength:</span>
@@ -66,7 +69,12 @@ const Product: NextPage<ProductProps> = ({ data }) => {
                 value={amount}
                 onChange={(e) => handleAmountChange(e)}
               />
-              <button className="bg-brown-500 rounded-md text-white px-12 py-3 ">
+              <button
+                onClick={() =>
+                  addProductToCart(String(product?._meta?.id), amount)
+                }
+                className="bg-brown-500 rounded-md text-white px-12 py-3 "
+              >
                 Buy
               </button>
             </div>

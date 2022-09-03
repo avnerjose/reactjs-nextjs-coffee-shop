@@ -1,4 +1,5 @@
 import { ArrowLeft } from "phosphor-react";
+import { useCart } from "../../hooks";
 import { formatToCurrency } from "../../utils/format_money";
 
 interface Step2Props {
@@ -6,7 +7,20 @@ interface Step2Props {
   handleReturn: () => void;
 }
 
+const DELIVERY_METHODS = [
+  {
+    label: "Delivery",
+    price: 10,
+  },
+  {
+    label: "Self-pickup",
+    price: 0,
+  },
+];
+
 export function Step2({ handleNext, handleReturn }: Step2Props) {
+  const { shippingPrice, setShippingPrice } = useCart();
+
   return (
     <div className="flex-[1.5] flex flex-col p-8">
       <h3 className="font-title text-lg mb-4">Delivery Address</h3>
@@ -42,16 +56,19 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
       <div>
         <h3 className="font-title text-lg mb-4">Delivery Method</h3>
         <div className="flex flex-col">
-          <label className="flex items-center gap-2">
-            <input className="accent-brown-500" type="radio" name="delivery" />
-            <span className="text-sm">Delivery</span>
-            <span className="font-semibold">{formatToCurrency(10)}</span>
-          </label>
-          <label className="flex items-center gap-2">
-            <input className="accent-brown-500" type="radio" name="delivery" />
-            <span className="text-sm">Self-pickup</span>
-            <span className="font-semibold">{formatToCurrency(0)}</span>
-          </label>
+          {DELIVERY_METHODS.map(({ label, price }) => (
+            <label key={label} className="flex items-center gap-2">
+              <input
+                onChange={() => setShippingPrice(price)}
+                className="accent-brown-500"
+                type="radio"
+                name="delivery"
+                checked={shippingPrice === price}
+              />
+              <span className="text-sm">{label}</span>
+              <span className="font-semibold">{formatToCurrency(price)}</span>
+            </label>
+          ))}
         </div>
       </div>
       <div className="flex items-center justify-between mt-8">

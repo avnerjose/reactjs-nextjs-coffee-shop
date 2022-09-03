@@ -1,7 +1,10 @@
 import { Trash } from "phosphor-react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useCart } from "../../hooks";
 import { formatToCurrency } from "../../utils/format_money";
 
 type Product = {
+  id: string;
   slug: string;
   name: string;
   smallDescription: string;
@@ -17,6 +20,23 @@ interface CartTableItemProps {
 }
 
 export function CartTableItem({ product }: CartTableItemProps) {
+  const [productAmount, setProductAmount] = useState(product.amount);
+  const { updateProductAmount, removeProductFromCart } = useCart();
+
+  const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+
+    if (value < 1) {
+      return;
+    }
+
+    setProductAmount(value);
+  };
+
+  useEffect(() => {
+    updateProductAmount(product.id, productAmount);
+  }, [productAmount]);
+
   return (
     <tr className="border-b-2 [&>*]:pb-4 border-brown-500">
       <td>
@@ -31,12 +51,20 @@ export function CartTableItem({ product }: CartTableItemProps) {
       <td>{formatToCurrency(product.price)}</td>
       <td>
         <div className="flex items-center justify-center">
-          <input className="w-14 text-center" type="number" value={3} />
+          <input
+            onChange={(e) => handleAmountChange(e)}
+            className="w-14 text-center"
+            type="number"
+            value={productAmount}
+          />
         </div>
       </td>
       <td>{formatToCurrency(product.price * product.amount)}</td>
       <td>
-        <Trash />
+        <Trash
+          onClick={() => removeProductFromCart(product.id)}
+          className="cursor-pointer"
+        />
       </td>
     </tr>
   );

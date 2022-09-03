@@ -69,7 +69,7 @@ export function Header({ isFixed = false }: HeaderProps) {
             <div className="relative cursor-pointer">
               <ShoppingCart className="text-xl  text-white" />
               {totalProductsAmount > 0 && (
-                <span className="flex items-center justify-center absolute top-[-0.8rem] right-[-0.8rem] text-sm bg-red-500 text-white rounded-full w-5 h-5">
+                <span className="flex items-center justify-center absolute top-[-0.8rem] right-[-0.8rem] text-xs bg-red-500 text-white rounded-full w-5 h-5">
                   {totalProductsAmount}
                 </span>
               )}

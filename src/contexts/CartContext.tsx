@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useState, useEffect } from "react";
 import { useGetProductByIdLazyQuery } from "../graphql/generated/graphql";
 
 interface CartProviderProps {
@@ -19,8 +19,11 @@ type Product = {
 };
 
 interface CartContextProps {
+  shippingPrice: number;
   totalProductsAmount: number;
+  totalProductsPrice: number;
   products: Product[];
+  setShippingPrice: (p: number) => void;
   addProductToCart: (productId: string, amount?: number) => Promise<void>;
   removeProductFromCart: (productId: string) => void;
   updateProductAmount: (productId: string, amount: number) => void;
@@ -33,6 +36,17 @@ export const CartContext = createContext<CartContextProps>(
 function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [getProductById] = useGetProductByIdLazyQuery();
+  const [shippingPrice, setShippingPrice] = useState(0);
+
+  const loadCartFromLocalStorage = () => {
+    const storedProducts = localStorage.getItem("@CoffeeShop:cart");
+
+    if (storedProducts) {
+      return JSON.parse(storedProducts);
+    }
+
+    return [];
+  };
 
   const addProductToCart = async (productId: string, amount: number = 1) => {
     const productAlreadyExists = products.find(
@@ -107,10 +121,19 @@ function CartProvider({ children }: CartProviderProps) {
   const updateCartLocalStorage = () =>
     localStorage.setItem("@CoffeeShop:cart", JSON.stringify(products));
 
-  const totalProductsAmount = products.reduce(
+  const totalProductsAmount = products?.reduce(
     (acc, product) => acc + product.amount,
     0
   );
+
+  const totalProductsPrice = products.reduce(
+    (acc, product) => acc + product.amount * product.price,
+    0
+  );
+
+  useEffect(() => {
+    setProducts(loadCartFromLocalStorage());
+  }, []);
 
   return (
     <CartContext.Provider
@@ -118,8 +141,11 @@ function CartProvider({ children }: CartProviderProps) {
         addProductToCart,
         removeProductFromCart,
         updateProductAmount,
+        setShippingPrice,
         totalProductsAmount,
+        totalProductsPrice,
         products,
+        shippingPrice,
       }}
     >
       {children}

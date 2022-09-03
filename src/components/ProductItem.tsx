@@ -1,4 +1,5 @@
 import { ShoppingCart } from "phosphor-react";
+import { useCart } from "../hooks";
 import { formatToCurrency } from "../utils/format_money";
 
 type Product = {
@@ -17,8 +18,10 @@ interface ProductItemProps {
 }
 
 export function ProductItem({
-  product: { name, image, price, category, slug },
+  product: { id, name, image, price, category, slug },
 }: ProductItemProps) {
+  const { addProductToCart } = useCart();
+
   return (
     <div className="flex flex-col h-fit items-center shadow-md rounded-md gap-2 py-4 px-2 bg-white relative">
       <img className="h-40" src={image?.url} alt={name} />
@@ -30,7 +33,10 @@ export function ProductItem({
           </a>
           <span className="text-lg font-bold">{formatToCurrency(price)}</span>
         </div>
-        <button className="bg-brown-500 text-white p-4 text-xl rounded-full ">
+        <button
+          onClick={() => addProductToCart(id)}
+          className="bg-brown-500 text-white p-4 text-xl rounded-full "
+        >
           <ShoppingCart />
         </button>
       </div>
