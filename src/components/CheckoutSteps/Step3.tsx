@@ -1,28 +1,34 @@
-import Link from "next/link";
 import { ArrowLeft } from "phosphor-react";
+import { useOrder } from "../../hooks";
 
 interface Step3Props {
   handleReturn: () => void;
 }
 
 export function Step3({ handleReturn }: Step3Props) {
+  const {
+    paymentMethods,
+    selectedPaymentMethod,
+    setSelectedPaymentMethod,
+  } = useOrder();
+
   return (
     <div className="flex-[1.5] flex flex-col p-8">
       <h3 className="font-title text-lg mb-4">Payment method</h3>
       <div className="flex flex-col">
-        <label className="flex items-center gap-2">
-          <input className="accent-brown-500" type="radio" name="delivery" />
-          Credit Card
-          <img className="h-8" src="/card_operators.png" alt="Card operators" />
-        </label>
-        <label className="flex items-center gap-2">
-          <input className="accent-brown-500" type="radio" name="delivery" />
-          PIX
-        </label>
-        <label className="flex items-center gap-2">
-          <input className="accent-brown-500" type="radio" name="delivery" />
-          Paypal
-        </label>
+        {paymentMethods.map(({ label, image }, index) => (
+          <label key={label} className="flex items-center gap-2">
+            <input
+              onChange={() => setSelectedPaymentMethod(index)}
+              checked={selectedPaymentMethod === index}
+              className="accent-brown-500"
+              type="radio"
+              name="delivery"
+            />
+            {label}
+            {image && <img className="h-8" src={image} alt="Card operators" />}
+          </label>
+        ))}
       </div>
       <div className="flex items-center justify-between mt-8">
         <button

@@ -19,11 +19,9 @@ type Product = {
 };
 
 interface CartContextProps {
-  shippingPrice: number;
   totalProductsAmount: number;
   totalProductsPrice: number;
   products: Product[];
-  setShippingPrice: (p: number) => void;
   addProductToCart: (productId: string, amount?: number) => Promise<void>;
   removeProductFromCart: (productId: string) => void;
   updateProductAmount: (productId: string, amount: number) => void;
@@ -36,7 +34,6 @@ export const CartContext = createContext<CartContextProps>(
 function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [getProductById] = useGetProductByIdLazyQuery();
-  const [shippingPrice, setShippingPrice] = useState(0);
 
   const loadCartFromLocalStorage = () => {
     const storedProducts = localStorage.getItem("@CoffeeShop:cart");
@@ -141,11 +138,9 @@ function CartProvider({ children }: CartProviderProps) {
         addProductToCart,
         removeProductFromCart,
         updateProductAmount,
-        setShippingPrice,
         totalProductsAmount,
         totalProductsPrice,
         products,
-        shippingPrice,
       }}
     >
       {children}

@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { useCart } from "../../hooks";
+import { useCart, useOrder } from "../../hooks";
 import { formatToCurrency } from "../../utils/format_money";
 
 export function CartFooter() {
-  const { shippingPrice, totalProductsPrice } = useCart();
+  const { totalProductsPrice } = useCart();
+  const { shippingPrice } = useOrder();
 
   return (
     <footer className="bg-brown-500">

@@ -1,8 +1,9 @@
-import { useCart } from "../hooks";
+import { useCart, useOrder } from "../hooks";
 import { formatToCurrency } from "../utils/format_money";
 
 export function CheckoutOrder() {
-  const { products, totalProductsPrice, shippingPrice } = useCart();
+  const { products, totalProductsPrice } = useCart();
+  const { shippingPrice } = useOrder();
 
   return (
     <aside className="flex-1 flex flex-col p-8">
