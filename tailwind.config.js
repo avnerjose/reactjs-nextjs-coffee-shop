@@ -1,5 +1,6 @@
 module.exports = {
   content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
+  mode: "jit",
   theme: {
     fontFamily: {
       title: "Marcellus, serif",
@@ -17,13 +18,15 @@ module.exports = {
       },
       colors: {
         dark: "#22201E",
-        primary: "#096843",
+        green: {
+          500: "#096843",
+        },
         beige: "#FFF9F1",
         gray: {
           200: "#DBDBDB",
         },
         brown: {
-          500: "#AF9375",
+          500: "#5A351E",
         },
         blue: {
           700: "#325D63",

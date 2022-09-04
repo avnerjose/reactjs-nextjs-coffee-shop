@@ -10,8 +10,32 @@ interface OrderContextProps {
   selectedDeliveryMethod: number;
   selectedPaymentMethod: number;
   shippingPrice: number;
+  contactInfo: {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+  };
+  deliveryAddress: {
+    street: string;
+    zipCode: string;
+    number: number;
+    city: string;
+    neighborhood: string;
+  };
   setSelectedDeliveryMethod: (p: number) => void;
   setSelectedPaymentMethod: (p: number) => void;
+  setContactInfo: (p: {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+  }) => void;
+  setDeliveryAddress: (p: {
+    street: string;
+    zipCode: string;
+    number: number;
+    city: string;
+    neighborhood: string;
+  }) => void;
 }
 
 export const OrderContext = createContext<OrderContextProps>(
@@ -66,8 +90,12 @@ export function OrderProvider({ children }: OrderProviderProps) {
         selectedDeliveryMethod,
         selectedPaymentMethod,
         shippingPrice: DELIVERY_METHODS[selectedDeliveryMethod].price,
+        contactInfo,
+        deliveryAddress,
         setSelectedDeliveryMethod,
         setSelectedPaymentMethod,
+        setContactInfo,
+        setDeliveryAddress,
       }}
     >
       {children}

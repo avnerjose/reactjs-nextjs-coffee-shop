@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import { useState } from "react";
 import {
-  CheckoutOrder,
   Step1,
   Step2,
   Step3,
@@ -9,9 +8,10 @@ import {
   Header,
   CheckoutHero,
 } from "../components";
+import { CheckoutStepsProgress } from "../components/CheckoutStepsProgress";
 
 const CheckOut: NextPage = () => {
-  const [activeStep, setActiveStep] = useState<0 | 1 | 2>(0);
+  const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3>(0);
 
   const HandleStep = () => {
     switch (activeStep) {
@@ -35,9 +35,11 @@ const CheckOut: NextPage = () => {
     <>
       <Header isFixed />
       <CheckoutHero />
-      <div className="flex max-w-screen-xl mx-auto">
+      <div className="flex flex-col max-w-screen-xl mx-auto">
+        <div className="flex items-center justify-center max-w-[80%] mt-4  gap-5 mx-auto w-full">
+          <CheckoutStepsProgress activeStep={activeStep} />
+        </div>
         <HandleStep />
-        <CheckoutOrder />
       </div>
       <Footer />
     </>

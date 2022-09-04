@@ -13,3 +13,10 @@
     opacity: 1;
   }
 }
+
+@layer components {
+  .step-progress {
+    @apply before:w-12 before:h-12 before:flex before:content-['✔'] before:items-center before:justify-center  before:border-2  before:border-gray-500  before:text-gray-500 before:font-bold before:text-center before:mt-0 before:mr-auto before:mb-[3px] before:ml-auto before:rounded-full before:relative before:z-[2] before:bg-white 
+    after:w-[50%] after:rounded-full after:right-[50%] after:h-[3px] after:content-[""] after:absolute after:bg-gray-500 after:top-[1.5rem] after:left-[-25%] after:z-0 first:after:hidden;
+  }
+}

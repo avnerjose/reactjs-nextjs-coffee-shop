@@ -1,55 +1,114 @@
 import Link from "next/link";
 import { ArrowLeft } from "phosphor-react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+import * as yup from "yup";
+import { useOrder } from "../../hooks";
+import { InputWithErrorMessage } from "../InputWithErrorMessage";
+import { CheckoutOrder } from "../CheckoutOrder";
+import { useEffect } from "react";
 interface Step1Props {
   handleNext: () => void;
 }
 
+const schema = yup.object({
+  firstName: yup.string().required("First name is required"),
+  lastName: yup.string().required("Last name is required"),
+  phoneNumber: yup
+    .string()
+    .required("Phone number is required")
+    .matches(/^\+\d+[ ]?\(?\d+\)?[ ]?\d+[-. ]?\d+$/, "Phone number is invalid"),
+});
+
+type ContactInfoProps = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+};
+
 export function Step1({ handleNext }: Step1Props) {
+  const { contactInfo, setContactInfo } = useOrder();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields },
+    setValue,
+  } = useForm<ContactInfoProps>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<ContactInfoProps> = (data) => {
+    setContactInfo(data);
+    handleNext();
+  };
+
+  useEffect(() => {
+    setValue("firstName", contactInfo.firstName);
+    setValue("lastName", contactInfo.lastName);
+    setValue("phoneNumber", contactInfo.phoneNumber);
+  }, []);
+
   return (
-    <div className="flex-[1.5] flex flex-col p-8">
-      <h3 className="font-title text-lg mb-4">Contacts</h3>
-      <div className="flex gap-8 mb-4">
-        <input
-          className="w-full p-2 border border-gray-200"
-          placeholder="First name"
-          type="text"
-        />
-        <input
-          className="w-full p-2 border border-gray-200"
-          placeholder="Last name"
-          type="text"
-        />
+    <div className="flex">
+      <div className="flex-[1.5] flex flex-col p-8">
+        <h3 className="font-title text-lg mb-4">Contacts</h3>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex items-start gap-8 mb-4">
+            <InputWithErrorMessage
+              register={register}
+              name="firstName"
+              placeHolder="First name"
+              hasError={!!errors.firstName}
+              hasTouched={!!touchedFields.firstName}
+              errorMessage={errors.firstName?.message}
+            />
+            <InputWithErrorMessage
+              register={register}
+              name="lastName"
+              placeHolder="Last name"
+              hasError={!!errors.lastName}
+              hasTouched={!!touchedFields.lastName}
+              errorMessage={errors.lastName?.message}
+            />
+          </div>
+          <InputWithErrorMessage
+            register={register}
+            name="phoneNumber"
+            placeHolder="Phone number"
+            hasError={!!errors.phoneNumber}
+            hasTouched={!!touchedFields.phoneNumber}
+            errorMessage={errors.phoneNumber?.message}
+            hasMask
+            mask="+99 (99) 99999-9999"
+          />
+          <div className="flex items-center justify-between mt-8">
+            <Link href="/cart">
+              <a className="flex items-center justify-center gap-2">
+                <ArrowLeft />
+                <span>Return</span>
+              </a>
+            </Link>
+            <button
+              type="submit"
+              className="bg-brown-500 py-2 px-10 text-white"
+            >
+              <span>Next</span>
+            </button>
+          </div>
+        </form>
+        <footer className="flex items-center gap-2 mt-4">
+          Page
+          <span className="flex items-center justify-center bg-brown-500 text-white w-8 h-8  rounded-full">
+            1
+          </span>
+          of
+          <span className="flex items-center justify-center bg-brown-500 text-white w-8 h-8  rounded-full">
+            4
+          </span>
+        </footer>
       </div>
-      <input
-        placeholder="Phone number"
-        className="border border-gray-200 p-2"
-        type="text"
-      />
-      <div className="flex items-center justify-between mt-8">
-        <Link href="/cart">
-          <a className="flex items-center justify-center gap-2">
-            <ArrowLeft />
-            <span>Return</span>
-          </a>
-        </Link>
-        <button
-          onClick={() => handleNext()}
-          className="bg-brown-500 py-2 px-10 text-white"
-        >
-          <span>Next</span>
-        </button>
-      </div>
-      <footer className="flex items-center gap-2 mt-4">
-        Page
-        <span className="flex items-center justify-center bg-brown-500 text-white w-8 h-8  rounded-full">
-          1
-        </span>
-        of
-        <span className="flex items-center justify-center bg-brown-500 text-white w-8 h-8  rounded-full">
-          3
-        </span>
-      </footer>
+      <CheckoutOrder />
     </div>
   );
 }
