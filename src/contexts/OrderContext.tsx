@@ -1,5 +1,20 @@
 import { createContext, ReactNode, useState } from "react";
 
+type ContactInfoProps = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+};
+
+type DeliveryAddressProps = {
+  street: string;
+  zipCode: string;
+  number: number;
+  city: string;
+  neighborhood: string;
+};
+
 interface OrderProviderProps {
   children: ReactNode;
 }
@@ -10,32 +25,12 @@ interface OrderContextProps {
   selectedDeliveryMethod: number;
   selectedPaymentMethod: number;
   shippingPrice: number;
-  contactInfo: {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-  };
-  deliveryAddress: {
-    street: string;
-    zipCode: string;
-    number: number;
-    city: string;
-    neighborhood: string;
-  };
+  contactInfo: ContactInfoProps;
+  deliveryAddress: DeliveryAddressProps;
   setSelectedDeliveryMethod: (p: number) => void;
   setSelectedPaymentMethod: (p: number) => void;
-  setContactInfo: (p: {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-  }) => void;
-  setDeliveryAddress: (p: {
-    street: string;
-    zipCode: string;
-    number: number;
-    city: string;
-    neighborhood: string;
-  }) => void;
+  setContactInfo: (p: ContactInfoProps) => void;
+  setDeliveryAddress: (p: DeliveryAddressProps) => void;
 }
 
 export const OrderContext = createContext<OrderContextProps>(
@@ -71,6 +66,7 @@ export function OrderProvider({ children }: OrderProviderProps) {
     firstName: "",
     lastName: "",
     phoneNumber: "",
+    email: "",
   });
   const [deliveryAddress, setDeliveryAddress] = useState({
     street: "",

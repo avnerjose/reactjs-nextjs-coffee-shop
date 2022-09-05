@@ -8,6 +8,7 @@ import {
   Header,
   CheckoutHero,
 } from "../components";
+import { Step4 } from "../components/CheckoutSteps/Step4";
 import { CheckoutStepsProgress } from "../components/CheckoutStepsProgress";
 
 const CheckOut: NextPage = () => {
@@ -25,7 +26,14 @@ const CheckOut: NextPage = () => {
           />
         );
       case 2:
-        return <Step3 handleReturn={() => setActiveStep(1)} />;
+        return (
+          <Step3
+            handleNext={() => setActiveStep(3)}
+            handleReturn={() => setActiveStep(1)}
+          />
+        );
+      case 3:
+        return <Step4 handleReturn={() => setActiveStep(2)} />;
       default:
         return <Step1 handleNext={() => setActiveStep(1)} />;
     }

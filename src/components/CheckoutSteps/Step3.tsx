@@ -3,10 +3,11 @@ import { useOrder } from "../../hooks";
 import { CheckoutOrder } from "../CheckoutOrder";
 
 interface Step3Props {
+  handleNext: () => void;
   handleReturn: () => void;
 }
 
-export function Step3({ handleReturn }: Step3Props) {
+export function Step3({ handleNext, handleReturn }: Step3Props) {
   const {
     paymentMethods,
     selectedPaymentMethod,
@@ -42,8 +43,11 @@ export function Step3({ handleReturn }: Step3Props) {
             <ArrowLeft />
             <span>Return</span>
           </button>
-          <button className="bg-brown-500 py-2 px-10 text-white">
-            <span>Finish Order</span>
+          <button
+            onClick={() => handleNext()}
+            className="bg-brown-500 py-2 px-10 text-white"
+          >
+            <span>Confirm Order</span>
           </button>
         </div>
         <footer className="flex items-center gap-2 mt-4">

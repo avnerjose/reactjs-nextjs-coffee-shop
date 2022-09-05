@@ -19,12 +19,14 @@ const schema = yup.object({
     .string()
     .required("Phone number is required")
     .matches(/^\+\d+[ ]?\(?\d+\)?[ ]?\d+[-. ]?\d+$/, "Phone number is invalid"),
+  email: yup.string().email("Email is invalid").required("Email is required"),
 });
 
 type ContactInfoProps = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  email: string;
 };
 
 export function Step1({ handleNext }: Step1Props) {
@@ -72,16 +74,26 @@ export function Step1({ handleNext }: Step1Props) {
               errorMessage={errors.lastName?.message}
             />
           </div>
-          <InputWithErrorMessage
-            register={register}
-            name="phoneNumber"
-            placeHolder="Phone number"
-            hasError={!!errors.phoneNumber}
-            hasTouched={!!touchedFields.phoneNumber}
-            errorMessage={errors.phoneNumber?.message}
-            hasMask
-            mask="+99 (99) 99999-9999"
-          />
+          <div className="flex items-start gap-8 mb-4">
+            <InputWithErrorMessage
+              register={register}
+              name="phoneNumber"
+              placeHolder="Phone number"
+              hasError={!!errors.phoneNumber}
+              hasTouched={!!touchedFields.phoneNumber}
+              errorMessage={errors.phoneNumber?.message}
+              hasMask
+              mask="+99 (99) 99999-9999"
+            />
+            <InputWithErrorMessage
+              register={register}
+              name="email"
+              placeHolder="E-mail"
+              hasError={!!errors.email}
+              hasTouched={!!touchedFields.email}
+              errorMessage={errors.email?.message}
+            />
+          </div>
           <div className="flex items-center justify-between mt-8">
             <Link href="/cart">
               <a className="flex items-center justify-center gap-2">
