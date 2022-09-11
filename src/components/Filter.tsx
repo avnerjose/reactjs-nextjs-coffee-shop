@@ -117,7 +117,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
               onChange={(e) =>
                 setBrand(e.target.value === "All" ? null : e.target.value)
               }
-              className="text-dark p-1 bg-brown-500 rounded-sm"
+              className="p-1 bg-brown-500 rounded-sm text-white"
             >
               {filterOptions?.brands.map((brand) => (
                 <option key={brand} value={brand}>
@@ -180,7 +180,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
                   e.target.value === "All" ? null : parseFloat(e.target.value)
                 )
               }
-              className="text-dark p-1 bg-brown-500 rounded-sm"
+              className="p-1 bg-brown-500 rounded-sm text-white"
             >
               {filterOptions?.weights.map((weights) => (
                 <option key={weights} value={weights}>
@@ -198,7 +198,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
                   e.target.value === "All" ? null : parseFloat(e.target.value)
                 )
               }
-              className="text-dark p-1 bg-brown-500 rounded-sm"
+              className="p-1 bg-brown-500 rounded-sm text-white"
             >
               {filterOptions?.coffeeStrengths.map((coffeeStrength) => (
                 <option key={coffeeStrength} value={coffeeStrength}>
