@@ -33,7 +33,12 @@ const CheckOut: NextPage = () => {
           />
         );
       case 3:
-        return <Step4 handleReturn={() => setActiveStep(2)} />;
+        return (
+          <Step4
+            handleReturn={() => setActiveStep(2)}
+            setActiveStep={setActiveStep}
+          />
+        );
       default:
         return <Step1 handleNext={() => setActiveStep(1)} />;
     }

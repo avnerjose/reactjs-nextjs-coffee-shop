@@ -5,23 +5,31 @@ import { CheckoutOrder } from "../CheckoutOrder";
 
 interface Step4Props {
   handleReturn: () => void;
+  setActiveStep: (p: 0 | 1 | 2 | 3) => void;
 }
 
-export function Step4({ handleReturn }: Step4Props) {
+export function Step4({ handleReturn, setActiveStep }: Step4Props) {
   const {
     contactInfo,
     deliveryAddress,
-    selectedDeliveryMethod,
     paymentMethods,
+    selectedDeliveryMethod,
+    deliveryMethods,
+    selectedPaymentMethod,
   } = useOrder();
 
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-[1.5fr,1fr]">
         <div className="flex flex-col p-8">
-          <h3 className="font-title text-lg mb-4  after:content-[''] after:block after:h-[1px] after:w-[60%] after:border-t after:border-t-gray-500 after:border-dashed ">
-            Your contact information
-          </h3>
+          <div className="flex items-center justify-between relative after:absolute after:content-[''] after:block after:h-[1px] after:w-[60%] after:border-t after:border-t-gray-500 after:border-dashed ">
+            <h3 className="font-title text-lg mb-4">
+              Your contact information
+            </h3>
+            <button onClick={() => setActiveStep(1)} className="text-brown-500">
+              Edit
+            </button>
+          </div>
           <ul>
             <li>
               {contactInfo.firstName} {contactInfo.lastName}
@@ -32,9 +40,12 @@ export function Step4({ handleReturn }: Step4Props) {
         </div>
         <CheckoutOrder />
         <div className="px-8">
-          <h3 className="font-title text-lg mb-4  after:content-[''] after:block after:h-[1px] after:w-[60%] after:border-t after:border-t-gray-500 after:border-dashed">
-            Delivery information
-          </h3>
+          <div className="flex items-center justify-between relative after:absolute after:content-[''] after:block after:h-[1px] after:w-[60%] after:border-t after:border-t-gray-500 after:border-dashed ">
+            <h3 className="font-title text-lg mb-4">Delivery information</h3>
+            <button onClick={() => setActiveStep(2)} className="text-brown-500">
+              Edit
+            </button>
+          </div>
           <div className="flex flex-col">
             <ul>
               <li>
@@ -44,20 +55,29 @@ export function Step4({ handleReturn }: Step4Props) {
                 {deliveryAddress.city}, {deliveryAddress.neighborhood}
               </li>
               <li>{deliveryAddress.zipCode}</li>
+              <li>
+                {deliveryMethods[selectedDeliveryMethod].label} -{" "}
+                {formatToCurrency(
+                  deliveryMethods[selectedDeliveryMethod].price
+                )}
+              </li>
             </ul>
           </div>
         </div>
         <div className="px-8">
-          <h3 className="font-title text-lg mb-4  after:content-[''] after:block after:h-[1px] after:w-[60%] after:border-t after:border-t-gray-500 after:border-dashed">
-            Payment method
-          </h3>
+          <div className="flex items-center justify-between relative after:absolute after:content-[''] after:block after:h-[1px] after:w-[60%] after:border-t after:border-t-gray-500 after:border-dashed ">
+            <h3 className="font-title text-lg mb-4">Payment method</h3>
+            <button onClick={() => setActiveStep(2)} className="text-brown-500">
+              Edit
+            </button>
+          </div>
           <div className="flex items-center gap-2">
-            <span>{paymentMethods[selectedDeliveryMethod].label}</span>
-            {paymentMethods[selectedDeliveryMethod].image && (
+            <span>{paymentMethods[selectedPaymentMethod].label}</span>
+            {paymentMethods[selectedPaymentMethod].image && (
               <img
                 className="h-8"
-                src={paymentMethods[selectedDeliveryMethod].image}
-                alt={paymentMethods[selectedDeliveryMethod].label}
+                src={paymentMethods[selectedPaymentMethod].image}
+                alt={paymentMethods[selectedPaymentMethod].label}
               />
             )}
           </div>

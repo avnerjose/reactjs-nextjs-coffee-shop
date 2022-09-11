@@ -25,8 +25,14 @@ const schema = yup.object({
   street: yup.string().required("Street is required"),
   city: yup.string().required("City is required"),
   neighborhood: yup.string().required("Neighborhood is required"),
-  number: yup.number().required("Number is required"),
-  zipCode: yup.string().required("Zip code is required"),
+  number: yup
+    .number()
+    .required("Number is required")
+    .min(1, "Number must be greater than 0"),
+  zipCode: yup
+    .string()
+    .required("Zip code is required")
+    .matches(/^\d{5}-\d{3}$/, "Zip code is invalid"),
 });
 
 export function Step2({ handleNext, handleReturn }: Step2Props) {
@@ -80,6 +86,8 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
               placeHolder="ZIP code"
               register={register}
               errorMessage={errors.zipCode?.message}
+              hasMask
+              mask="99999-999"
             />
             <InputWithErrorMessage
               hasError={!!errors.number}

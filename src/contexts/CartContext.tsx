@@ -33,7 +33,7 @@ export const CartContext = createContext<CartContextProps>(
 
 function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
-  const [getProductById] = useGetProductByIdLazyQuery();
+  const [getProductById, { data }] = useGetProductByIdLazyQuery();
 
   const loadCartFromLocalStorage = () => {
     const storedProducts = localStorage.getItem("@CoffeeShop:cart");
@@ -51,6 +51,7 @@ function CartProvider({ children }: CartProviderProps) {
     );
 
     if (productAlreadyExists) {
+      console.log("Entrou no if");
       const newProducts = products.map((product) =>
         product.id === productId
           ? { ...product, amount: product.amount + amount }
@@ -58,32 +59,34 @@ function CartProvider({ children }: CartProviderProps) {
       );
 
       setProducts(newProducts);
-      updateCartLocalStorage();
+      updateCartLocalStorage(newProducts);
     } else {
-      const { data } = await getProductById({
+      getProductById({
         variables: {
           id: productId,
         },
       });
 
-      const apiProduct =
-        data?.allProducts?.edges && data?.allProducts?.edges[0]?.node;
+      if (data) {
+        const apiProduct =
+          data?.allProducts?.edges && data?.allProducts?.edges[0]?.node;
 
-      const product: Product = {
-        id: String(apiProduct?._meta.id),
-        slug: String(apiProduct?._meta.uid),
-        name: String(apiProduct?.name),
-        category: String(apiProduct?.category),
-        image: {
-          url: String(apiProduct?.image.url),
-        },
-        smallDescription: String(apiProduct?.small_description),
-        price: Number(apiProduct?.price),
-        amount,
-      };
+        const product: Product = {
+          id: String(apiProduct?._meta.id),
+          slug: String(apiProduct?._meta.uid),
+          name: String(apiProduct?.name),
+          category: String(apiProduct?.category),
+          image: {
+            url: String(apiProduct?.image.url),
+          },
+          smallDescription: String(apiProduct?.small_description),
+          price: Number(apiProduct?.price),
+          amount,
+        };
 
-      setProducts((prev) => [...prev, product]);
-      updateCartLocalStorage();
+        setProducts((prev) => [...prev, product]);
+        updateCartLocalStorage([...products, product]);
+      }
     }
   };
 
@@ -98,7 +101,7 @@ function CartProvider({ children }: CartProviderProps) {
       );
 
       setProducts(newProducts);
-      updateCartLocalStorage();
+      updateCartLocalStorage(newProducts);
     }
   };
 
@@ -112,10 +115,10 @@ function CartProvider({ children }: CartProviderProps) {
     );
 
     setProducts(newProducts);
-    updateCartLocalStorage();
+    updateCartLocalStorage(newProducts);
   };
 
-  const updateCartLocalStorage = () =>
+  const updateCartLocalStorage = (products: Product[]) =>
     localStorage.setItem("@CoffeeShop:cart", JSON.stringify(products));
 
   const totalProductsAmount = products?.reduce(
