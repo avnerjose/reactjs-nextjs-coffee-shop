@@ -1,11 +1,11 @@
 import { ArrowLeft } from "phosphor-react";
-import { useCart, useOrder } from "../../hooks";
+import { useOrder } from "../../hooks";
 import { formatToCurrency } from "../../utils/format_money";
 import { CheckoutOrder } from "../CheckoutOrder";
 
 interface Step4Props {
   handleReturn: () => void;
-  setActiveStep: (p: 0 | 1 | 2 | 3) => void;
+  setActiveStep: (p: 0 | 1 | 2 | 3 | 4) => void;
 }
 
 export function Step4({ handleReturn, setActiveStep }: Step4Props) {
@@ -92,7 +92,10 @@ export function Step4({ handleReturn, setActiveStep }: Step4Props) {
             <ArrowLeft />
             <span>Return</span>
           </button>
-          <button className="bg-brown-500 py-2 px-10 text-white">
+          <button
+            onClick={() => setActiveStep(4)}
+            className="bg-brown-500 py-2 px-10 text-white"
+          >
             <span>Finish Order</span>
           </button>
         </div>

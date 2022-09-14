@@ -10,9 +10,10 @@ import {
 } from "../components";
 import { Step4 } from "../components/CheckoutSteps/Step4";
 import { CheckoutStepsProgress } from "../components/CheckoutStepsProgress";
+import { SuccessfulPurchaseModal } from "../components/SuccessfulPurchaseModal";
 
 const CheckOut: NextPage = () => {
-  const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3>(0);
+  const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(0);
 
   const HandleStep = () => {
     switch (activeStep) {
@@ -47,6 +48,7 @@ const CheckOut: NextPage = () => {
   return (
     <>
       <Header isFixed />
+      <SuccessfulPurchaseModal isOpen={activeStep === 4} />
       <CheckoutHero />
       <div className="flex flex-col max-w-screen-xl mx-auto">
         <div className="flex items-center justify-center max-w-[80%] mt-4  gap-5 mx-auto w-full">

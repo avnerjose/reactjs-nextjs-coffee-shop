@@ -25,6 +25,7 @@ interface CartContextProps {
   addProductToCart: (productId: string, amount?: number) => Promise<void>;
   removeProductFromCart: (productId: string) => void;
   updateProductAmount: (productId: string, amount: number) => void;
+  cleanCart: () => void;
 }
 
 export const CartContext = createContext<CartContextProps>(
@@ -33,7 +34,7 @@ export const CartContext = createContext<CartContextProps>(
 
 function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
-  const [getProductById, { data }] = useGetProductByIdLazyQuery();
+  const [getProductById, { data, loading }] = useGetProductByIdLazyQuery();
 
   const loadCartFromLocalStorage = () => {
     const storedProducts = localStorage.getItem("@CoffeeShop:cart");
@@ -67,7 +68,7 @@ function CartProvider({ children }: CartProviderProps) {
         },
       });
 
-      if (data) {
+      if (data && !loading) {
         const apiProduct =
           data?.allProducts?.edges && data?.allProducts?.edges[0]?.node;
 
@@ -118,6 +119,11 @@ function CartProvider({ children }: CartProviderProps) {
     updateCartLocalStorage(newProducts);
   };
 
+  const cleanCart = () => {
+    setProducts([]);
+    updateCartLocalStorage([]);
+  };
+
   const updateCartLocalStorage = (products: Product[]) =>
     localStorage.setItem("@CoffeeShop:cart", JSON.stringify(products));
 
@@ -135,9 +141,14 @@ function CartProvider({ children }: CartProviderProps) {
     setProducts(loadCartFromLocalStorage());
   }, []);
 
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
+
   return (
     <CartContext.Provider
       value={{
+        cleanCart,
         addProductToCart,
         removeProductFromCart,
         updateProductAmount,
