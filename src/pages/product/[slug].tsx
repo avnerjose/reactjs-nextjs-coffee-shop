@@ -1,5 +1,6 @@
 import { PrismicRichText } from "@prismicio/react";
 import { GetServerSideProps, NextPage } from "next";
+import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { Footer, Header, StarRating } from "../../components";
 import { GetProductBySlugQuery } from "../../graphql/generated/graphql";
@@ -35,11 +36,13 @@ const Product: NextPage<ProductProps> = ({ data }) => {
       <section className="max-w-screen-xl mx-auto p-8">
         <div className="flex items-center justify-center gap-16 flex-col lg:flex-row">
           <div>
-            <img
-              className="h-96 flex-1 mt-4"
-              src={product?.image?.url}
-              alt="costa rica coffee"
-            />
+            <div className="relative h-[384px] w-[184px]">
+              <Image
+                layout="fill"
+                src={product?.image?.url}
+                alt="costa rica coffee"
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-3 max-w-2xl">
             <h2 className="font-title text-2xl">{product?.name}</h2>
