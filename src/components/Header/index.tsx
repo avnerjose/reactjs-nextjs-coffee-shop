@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-import { useScroll, useCart, useFilter } from "../hooks";
+import { useScroll, useCart, useFilter } from "../../hooks";
 import { ShoppingCart } from "phosphor-react";
 import { useRouter } from "next/router";
 
@@ -34,6 +34,7 @@ export function Header({ isFixed = false }: HeaderProps) {
 
   return (
     <header
+      data-testid="header"
       className={classNames("transition-colors h-14", {
         "fixed top-0 left-0 right-0 z-10": isFixed,
         "bg-black bg-opacity-[0.3] shadow-sm ": isHeaderTransparent,

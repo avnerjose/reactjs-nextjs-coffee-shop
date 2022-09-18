@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface StarRatingProps {
@@ -39,7 +40,13 @@ export function StarRating({ rating }: StarRatingProps) {
   return (
     <div className="flex gap-1">
       {stars.map((star, index) => (
-        <img key={index} src={`/star_${star}.svg`} alt="" />
+        <Image
+          width={24}
+          height={24}
+          key={index}
+          src={`/star_${star}.svg`}
+          alt={`${star} star`}
+        />
       ))}
     </div>
   );

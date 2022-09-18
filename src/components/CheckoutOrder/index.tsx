@@ -1,5 +1,5 @@
-import { useCart, useOrder } from "../hooks";
-import { formatToCurrency } from "../utils/format_money";
+import { useCart, useOrder } from "../../hooks";
+import { formatToCurrency } from "../../utils/format_money";
 
 export function CheckoutOrder() {
   const { products, totalProductsPrice } = useCart();

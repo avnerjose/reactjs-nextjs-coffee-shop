@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useGetFilterValuesQuery } from "../graphql/generated/graphql";
 import { useFilter } from "../hooks";
+import Image from "next/image";
 
 interface FilterProps {
   isOpen: boolean;
@@ -109,7 +110,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
               Reset
             </button>
           </div>
-          <img src="/separator.png" alt="separator" />
+          <Image width={192} height={28} src="/separator.png" alt="separator" />
           <div className="flex flex-col gap-2">
             <h3>Brand</h3>
             <select

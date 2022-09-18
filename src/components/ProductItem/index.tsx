@@ -1,8 +1,8 @@
 import { ShoppingCart } from "phosphor-react";
-import { useCart } from "../hooks";
-import { formatToCurrency } from "../utils/format_money";
+import { useCart } from "../../hooks";
+import { formatToCurrency } from "../../utils/format_money";
 
-type Product = {
+export type Product = {
   id: string;
   name: string;
   slug: string;

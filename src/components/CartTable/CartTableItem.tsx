@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Trash } from "phosphor-react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useCart } from "../../hooks";
@@ -40,7 +41,12 @@ export function CartTableItem({ product }: CartTableItemProps) {
   return (
     <tr className="border-b-2 [&>*]:pb-4 border-brown-500">
       <td>
-        <img className="h-32" src={product.image.url} alt={product.name} />
+        <Image
+          height={128}
+          width={64}
+          src={product.image.url}
+          alt={product.name}
+        />
       </td>
       <td>
         <div className="flex flex-col items-start p-8">

@@ -1,9 +1,9 @@
 import Modal from "react-modal";
 import { CheckCircle } from "phosphor-react";
-import { useCart } from "../hooks";
+import { useCart } from "../../hooks";
 import Link from "next/link";
 
-Modal.setAppElement("#__next");
+process.env.NODE_ENV !== "test" && Modal.setAppElement("#__next");
 
 interface SuccessfulPurchaseModalProps {
   isOpen: boolean;
@@ -17,6 +17,7 @@ export function SuccessfulPurchaseModal({
   return (
     <Modal
       isOpen={isOpen}
+      ariaHideApp={false}
       overlayClassName="react-modal-overlay"
       className="react-modal-content relative"
     >
