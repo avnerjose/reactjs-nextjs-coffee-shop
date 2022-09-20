@@ -52,7 +52,6 @@ function CartProvider({ children }: CartProviderProps) {
     );
 
     if (productAlreadyExists) {
-      console.log("Entrou no if");
       const newProducts = products.map((product) =>
         product.id === productId
           ? { ...product, amount: product.amount + amount }
@@ -140,10 +139,6 @@ function CartProvider({ children }: CartProviderProps) {
   useEffect(() => {
     setProducts(loadCartFromLocalStorage());
   }, []);
-
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
 
   return (
     <CartContext.Provider
