@@ -7,5 +7,11 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/tests/setup.ts",
+    coverage: {
+      all: true,
+      provider: "istanbul",
+      exclude: ["src/graphql/", "node_modules/", "src/lib/"],
+      include: ["src/"],
+    },
   },
 });
