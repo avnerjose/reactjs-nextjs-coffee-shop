@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { CartTable, Footer, Header, CartFooter, CartHero } from "../components";
+import { CartTable, Footer, Header, CartFooter, CartHero } from "@components";
 
 const Cart: NextPage = () => {
   return (

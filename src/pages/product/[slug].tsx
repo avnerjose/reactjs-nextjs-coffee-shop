@@ -2,7 +2,7 @@ import { PrismicRichText } from "@prismicio/react";
 import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { Footer, Header, StarRating } from "../../components";
+import { Footer, Header, StarRating } from "@components";
 import { GetProductBySlugQuery } from "../../graphql/generated/graphql";
 import { ssrGetProductBySlug } from "../../graphql/generated/page";
 import { useCart } from "../../hooks";

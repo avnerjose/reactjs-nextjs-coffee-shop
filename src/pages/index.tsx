@@ -7,7 +7,7 @@ import {
   HeroSection,
   Popular,
   Stats,
-} from "../components";
+} from "@components";
 
 const HomePage: NextPage = () => {
   return (

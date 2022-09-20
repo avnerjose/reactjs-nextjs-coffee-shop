@@ -4,13 +4,13 @@ import {
   Step1,
   Step2,
   Step3,
+  Step4,
   Footer,
   Header,
   CheckoutHero,
-} from "../components";
-import { Step4 } from "../components/CheckoutSteps/Step4";
-import { CheckoutStepsProgress } from "../components/CheckoutStepsProgress";
-import { SuccessfulPurchaseModal } from "../components/SuccessfulPurchaseModal";
+  CheckoutStepsProgress,
+  SuccessfulPurchaseModal,
+} from "@components";
 
 const CheckOut: NextPage = () => {
   const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(0);

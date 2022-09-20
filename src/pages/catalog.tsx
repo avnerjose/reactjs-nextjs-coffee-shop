@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useEffect, useState } from "react";
-import { Filter, Header, ProductItem } from "../components";
+import { Filter, Header, ProductItem } from "@components";
 import { withFilter } from "../contexts/FilterContext";
 import { GetAllProductsQuery } from "../graphql/generated/graphql";
 import {
