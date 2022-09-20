@@ -1,6 +1,6 @@
 import className from "classnames";
 import InputMask from "react-input-mask";
-import { UseFormRegister } from "react-hook-form";
+import { Control, Controller, UseFormRegister } from "react-hook-form";
 import { InputHTMLAttributes } from "react";
 
 interface InputWithErrorMessageProps
@@ -14,6 +14,7 @@ interface InputWithErrorMessageProps
   placeHolder: string;
   type?: string;
   register: UseFormRegister<any>;
+  control: Control<any>;
 }
 
 export function InputWithErrorMessage({
@@ -25,22 +26,33 @@ export function InputWithErrorMessage({
   placeHolder,
   name,
   register,
+  control,
   type = "text",
   ...rest
 }: InputWithErrorMessageProps) {
   return (
     <div className="flex flex-col gap-1 w-full">
       {hasMask ? (
-        <InputMask
-          {...register(name, { required: true })}
-          mask={mask}
-          className={className("w-full p-2 border border-gray-200", {
-            "border-red-500 text-red-500 outline-red-500":
-              hasError && hasTouched,
-          })}
-          placeholder={placeHolder}
-          type={type}
-          {...rest}
+        <Controller
+          defaultValue=""
+          control={control}
+          name={name}
+          rules={{
+            required: true,
+          }}
+          render={({ field, fieldState: { isTouched, error } }) => (
+            <InputMask
+              {...field}
+              mask={mask}
+              className={className("w-full p-2 border border-gray-200", {
+                "border-red-500 text-red-500 outline-red-500":
+                  error && isTouched,
+              })}
+              placeholder={placeHolder}
+              type={type}
+              {...rest}
+            />
+          )}
         />
       ) : (
         <input
@@ -55,7 +67,9 @@ export function InputWithErrorMessage({
         />
       )}
       {hasError && hasTouched && (
-        <span className="text-red-500 text-sm font-light">{errorMessage}</span>
+        <span role="alert" className="text-red-500 text-sm font-light">
+          {errorMessage}
+        </span>
       )}
     </div>
   );

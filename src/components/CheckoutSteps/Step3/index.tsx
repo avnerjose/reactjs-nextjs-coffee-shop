@@ -1,6 +1,6 @@
 import { ArrowLeft } from "phosphor-react";
-import { useOrder } from "../../hooks";
-import { CheckoutOrder } from "../CheckoutOrder";
+import { useOrder } from "../../../hooks";
+import { CheckoutOrder } from "../../CheckoutOrder";
 
 interface Step3Props {
   handleNext: () => void;

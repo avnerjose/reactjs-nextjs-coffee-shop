@@ -4,9 +4,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
-import { useOrder } from "../../hooks";
-import { InputWithErrorMessage } from "../InputWithErrorMessage";
-import { CheckoutOrder } from "../CheckoutOrder";
+import { useOrder } from "../../../hooks";
+import { InputWithErrorMessage } from "../../InputWithErrorMessage";
+import { CheckoutOrder } from "../../CheckoutOrder";
 import { useEffect } from "react";
 interface Step1Props {
   handleNext: () => void;
@@ -36,6 +36,7 @@ export function Step1({ handleNext }: Step1Props) {
     handleSubmit,
     formState: { errors, touchedFields },
     setValue,
+    control,
   } = useForm<ContactInfoProps>({
     resolver: yupResolver(schema),
   });
@@ -46,9 +47,9 @@ export function Step1({ handleNext }: Step1Props) {
   };
 
   useEffect(() => {
-    setValue("firstName", contactInfo.firstName);
-    setValue("lastName", contactInfo.lastName);
-    setValue("phoneNumber", contactInfo.phoneNumber);
+    setValue("firstName", contactInfo?.firstName);
+    setValue("lastName", contactInfo?.lastName);
+    setValue("phoneNumber", contactInfo?.phoneNumber);
   }, []);
 
   return (
@@ -58,6 +59,7 @@ export function Step1({ handleNext }: Step1Props) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex items-start gap-8 mb-4">
             <InputWithErrorMessage
+              control={control}
               register={register}
               name="firstName"
               placeHolder="First name"
@@ -66,6 +68,7 @@ export function Step1({ handleNext }: Step1Props) {
               errorMessage={errors.firstName?.message}
             />
             <InputWithErrorMessage
+              control={control}
               register={register}
               name="lastName"
               placeHolder="Last name"
@@ -76,6 +79,7 @@ export function Step1({ handleNext }: Step1Props) {
           </div>
           <div className="flex items-start gap-8 mb-4">
             <InputWithErrorMessage
+              control={control}
               register={register}
               name="phoneNumber"
               placeHolder="Phone number"
@@ -86,6 +90,7 @@ export function Step1({ handleNext }: Step1Props) {
               mask="+99 (99) 99999-9999"
             />
             <InputWithErrorMessage
+              control={control}
               register={register}
               name="email"
               placeHolder="E-mail"

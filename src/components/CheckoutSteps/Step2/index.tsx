@@ -1,11 +1,11 @@
 import { ArrowLeft } from "phosphor-react";
-import { useOrder } from "../../hooks";
-import { formatToCurrency } from "../../utils/format_money";
+import { useOrder } from "../../../hooks";
+import { formatToCurrency } from "../../../utils/format_money";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { InputWithErrorMessage } from "../InputWithErrorMessage";
-import { CheckoutOrder } from "../CheckoutOrder";
+import { InputWithErrorMessage } from "../../InputWithErrorMessage";
+import { CheckoutOrder } from "../../CheckoutOrder";
 import { useEffect } from "react";
 
 interface Step2Props {
@@ -47,6 +47,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors, touchedFields },
   } = useForm<DeliveryAddressProps>({
     resolver: yupResolver(schema),
@@ -58,11 +59,11 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
   };
 
   useEffect(() => {
-    setValue("city", deliveryAddress.city);
-    setValue("neighborhood", deliveryAddress.neighborhood);
-    setValue("number", deliveryAddress.number);
-    setValue("street", deliveryAddress.street);
-    setValue("zipCode", deliveryAddress.zipCode);
+    setValue("city", deliveryAddress?.city);
+    setValue("neighborhood", deliveryAddress?.neighborhood);
+    setValue("number", deliveryAddress?.number);
+    setValue("street", deliveryAddress?.street);
+    setValue("zipCode", deliveryAddress?.zipCode);
   }, []);
 
   return (
@@ -71,6 +72,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
         <h3 className="font-title text-lg mb-4">Delivery Address</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputWithErrorMessage
+            control={control}
             hasError={!!errors.street}
             hasTouched={!!touchedFields.street}
             name="street"
@@ -80,6 +82,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
           />
           <div className="flex gap-8 my-4">
             <InputWithErrorMessage
+              control={control}
               hasError={!!errors.zipCode}
               hasTouched={!!touchedFields.zipCode}
               name="zipCode"
@@ -90,6 +93,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
               mask="99999-999"
             />
             <InputWithErrorMessage
+              control={control}
               hasError={!!errors.number}
               hasTouched={!!touchedFields.number}
               name="number"
@@ -101,6 +105,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
           </div>
           <div className="flex gap-8 mb-4">
             <InputWithErrorMessage
+              control={control}
               hasError={!!errors.city}
               hasTouched={!!touchedFields.city}
               name="city"
@@ -109,10 +114,11 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
               errorMessage={errors.city?.message}
             />
             <InputWithErrorMessage
+              control={control}
               hasError={!!errors.neighborhood}
               hasTouched={!!touchedFields.neighborhood}
               name="neighborhood"
-              placeHolder="Neightborhood"
+              placeHolder="Neighborhood"
               register={register}
               errorMessage={errors.neighborhood?.message}
             />
@@ -146,6 +152,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
               <span>Return</span>
             </button>
             <button
+              data-testid="button"
               type="submit"
               className="bg-brown-500 py-2 px-10 text-white"
             >

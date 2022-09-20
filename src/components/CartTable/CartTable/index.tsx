@@ -1,5 +1,5 @@
-import { useCart } from "../../hooks";
-import { CartTableItem } from "./CartTableItem";
+import { useCart } from "../../../hooks";
+import { CartTableItem } from "../CartTableItem";
 
 export function CartTable() {
   const { products } = useCart();

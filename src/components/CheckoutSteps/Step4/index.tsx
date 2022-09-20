@@ -1,7 +1,7 @@
 import { ArrowLeft } from "phosphor-react";
-import { useOrder } from "../../hooks";
-import { formatToCurrency } from "../../utils/format_money";
-import { CheckoutOrder } from "../CheckoutOrder";
+import { useOrder } from "../../../hooks";
+import { formatToCurrency } from "../../../utils/format_money";
+import { CheckoutOrder } from "../../CheckoutOrder";
 
 interface Step4Props {
   handleReturn: () => void;

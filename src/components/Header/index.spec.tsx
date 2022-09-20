@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { useRouter } from "next/router";
 import { describe, expect, it, vi } from "vitest";
 import { Header } from ".";
+import { useFilter } from "../../hooks";
 import { useCart } from "../../hooks/useCart";
 import { useScroll } from "../../hooks/useScroll";
 
@@ -27,6 +28,13 @@ vi.mock("../../hooks/useCart", () => ({
 vi.mock("../../hooks/useScroll", () => ({
   useScroll: vi.fn(() => ({
     setSectionToScroll: vi.fn(),
+  })),
+}));
+
+vi.mock("../../hooks/useFilter", () => ({
+  useFilter: vi.fn(() => ({
+    search: "",
+    setSearch: vi.fn(),
   })),
 }));
 
@@ -102,5 +110,22 @@ describe("Header Component", () => {
     render(<Header isFixed />);
 
     expect(screen.getByTestId("header")).toHaveClass("bg-opacity-[0.3]");
+  });
+
+  it("should be able to use search input", () => {
+    const mockedSetSearch = vi.fn();
+    vi.mocked(useFilter).mockReturnValue({
+      setSearch: mockedSetSearch,
+    } as any);
+    vi.mocked(useRouter).mockReturnValue({
+      asPath: "/catalog",
+    } as any);
+
+    render(<Header />);
+
+    const searchInput = screen.getByPlaceholderText("Search for products here");
+
+    fireEvent.change(searchInput, { target: { value: "test" } });
+    expect(mockedSetSearch).toHaveBeenCalledWith("test");
   });
 });

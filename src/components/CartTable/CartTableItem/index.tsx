@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Trash } from "phosphor-react";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useCart } from "../../hooks";
-import { formatToCurrency } from "../../utils/format_money";
+import { useCart } from "../../../hooks";
+import { formatToCurrency } from "../../../utils/format_money";
 
 type Product = {
   id: string;
