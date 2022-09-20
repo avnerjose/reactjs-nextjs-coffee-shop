@@ -9,7 +9,7 @@ export * from "./Filter";
 export * from "./Footer";
 export * from "./Header";
 export * from "./ProductItem";
-export * from "./CheckoutStepsProgress";
+export * from "./CheckoutStepsProgress/CheckoutStepsProgress";
 export * from "./SuccessfulPurchaseModal";
 export * from "./CartTable/CartTable";
 export * from "./CartTable/CartTableItem";
