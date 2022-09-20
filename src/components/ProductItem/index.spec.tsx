@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, vi } from "vitest";
 import { Product, ProductItem } from ".";
-import { useCart } from "../../hooks";
+import { useCart } from "@hooks";
 
-vi.mock("../../hooks/useCart.ts", () => ({
+vi.mock("@src/hooks/useCart.ts", () => ({
   useCart: vi.fn(() => ({
     addProductToCart: vi.fn(),
   })),

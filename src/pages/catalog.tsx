@@ -1,13 +1,10 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useEffect, useState } from "react";
 import { Filter, Header, ProductItem } from "@components";
-import { withFilter } from "../contexts/FilterContext";
-import { GetAllProductsQuery } from "../graphql/generated/graphql";
-import {
-  getServerPageGetAllProducts,
-  ssrGetAllProducts,
-} from "../graphql/generated/page";
-import { useFilter } from "../hooks";
+import { withFilter } from "@contexts";
+import { GetAllProductsQuery } from "@codegen/graphql";
+import { getServerPageGetAllProducts, ssrGetAllProducts } from "@codegen/page";
+import { useFilter } from "@hooks";
 
 type CatalogProps = {
   data: GetAllProductsQuery;

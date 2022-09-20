@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, vi } from "vitest";
 import { Step3 } from ".";
-import { PAYMENT_METHODS } from "../../../contexts/OrderContext";
+import { PAYMENT_METHODS } from "@contexts";
 
 type Product = {
   id: string;
@@ -35,7 +35,7 @@ const mockedHandleNext = vi.fn();
 const mockedHandleReturn = vi.fn();
 const mockedSetSelectedPaymentMethod = vi.fn();
 
-vi.mock("../../../hooks/useCart", () => ({
+vi.mock("@src/hooks/useCart", () => ({
   useCart: vi.fn(() => ({
     products: MOCKED_PRODUCTS,
     totalProductsPrice: MOCKED_PRODUCTS.reduce((acc, item) => {
@@ -44,7 +44,7 @@ vi.mock("../../../hooks/useCart", () => ({
   })),
 }));
 
-vi.mock("../../../hooks/useOrder", () => ({
+vi.mock("@src/hooks/useOrder", () => ({
   useOrder: vi.fn(() => ({
     paymentMethods: PAYMENT_METHODS,
     setSelectedPaymentMethod: mockedSetSelectedPaymentMethod,

@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, vi } from "vitest";
-import { string } from "yup";
 import { Step4 } from ".";
 import {
   DELIVERY_METHODS,
   PAYMENT_METHODS,
-} from "../../../contexts/OrderContext";
+} from "@contexts";
 
 const mockedHandleReturn = vi.fn();
 const mockedSetActiveStep = vi.fn();
@@ -51,7 +50,7 @@ const MOCKED_PRODUCTS: Product[] = [
   },
 ];
 
-vi.mock("../../../hooks/useCart", () => ({
+vi.mock("@src/hooks/useCart", () => ({
   useCart: vi.fn(() => ({
     products: MOCKED_PRODUCTS,
     totalProductsPrice: MOCKED_PRODUCTS.reduce((acc, item) => {
@@ -60,7 +59,7 @@ vi.mock("../../../hooks/useCart", () => ({
   })),
 }));
 
-vi.mock("../../../hooks/useOrder", () => ({
+vi.mock("@src/hooks/useOrder", () => ({
   useOrder: vi.fn(() => ({
     contactInfo: mockedContactInfo,
     deliveryAddress: mockedDeliveryAddress,

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, vi } from "vitest";
 import { SuccessfulPurchaseModal } from ".";
-import { useCart } from "../../hooks";
+import { useCart } from "@hooks";
 
 vi.mock("next/link", () => ({
   __esModule: true,
@@ -10,7 +10,7 @@ vi.mock("next/link", () => ({
   },
 }));
 
-vi.mock("../../hooks/useCart.ts", () => ({
+vi.mock("@src/hooks/useCart.ts", () => ({
   useCart: vi.fn(() => ({
     cleanCart: vi.fn(),
   })),

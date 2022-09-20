@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-import { useScroll, useCart, useFilter } from "../../hooks";
+import { useScroll, useCart, useFilter } from "@hooks";
 import { ShoppingCart } from "phosphor-react";
 import { useRouter } from "next/router";
 

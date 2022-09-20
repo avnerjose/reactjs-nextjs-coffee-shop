@@ -7,8 +7,8 @@ import {
 } from "@testing-library/react";
 import { describe, expect, vi } from "vitest";
 import { Step2 } from ".";
-import { DELIVERY_METHODS } from "../../../contexts/OrderContext";
-import { useOrder } from "../../../hooks";
+import { DELIVERY_METHODS } from "@contexts";
+import { useOrder } from "@hooks";
 
 type Product = {
   id: string;
@@ -53,7 +53,7 @@ const setup = () => {
   fireEvent.blur(screen.getByPlaceholderText("Number"));
 };
 
-vi.mock("../../../hooks/useCart", () => ({
+vi.mock("@src/hooks/useCart", () => ({
   useCart: vi.fn(() => ({
     products: MOCKED_PRODUCTS,
     totalProductsPrice: MOCKED_PRODUCTS.reduce((acc, item) => {
@@ -62,7 +62,7 @@ vi.mock("../../../hooks/useCart", () => ({
   })),
 }));
 
-vi.mock("../../../hooks/useOrder", () => ({
+vi.mock("@src/hooks/useOrder", () => ({
   useOrder: vi.fn(() => ({
     deliveryMethods: DELIVERY_METHODS,
   })),

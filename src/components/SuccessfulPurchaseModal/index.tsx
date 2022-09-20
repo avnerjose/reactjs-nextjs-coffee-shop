@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import { CheckCircle } from "phosphor-react";
-import { useCart } from "../../hooks";
+import { useCart } from "@hooks";
 import Link from "next/link";
 
 process.env.NODE_ENV !== "test" && Modal.setAppElement("#__next");

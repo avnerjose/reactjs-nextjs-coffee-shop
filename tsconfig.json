@@ -16,7 +16,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components": ["src/components/index.ts"]
+      "@components": ["src/components/index.ts"],
+      "@hooks": ["src/hooks/index.ts"],
+      "@utils": ["src/utils/index.ts"],
+      "@contexts": ["src/contexts/index.ts"],
+      "@codegen/graphql": ["src/graphql/generated/graphql.tsx"],
+      "@codegen/page": ["src/graphql/generated/page.tsx"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "."],

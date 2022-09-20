@@ -42,9 +42,7 @@ const MOCKED_PRODUCTS: Product[] = [
   },
 ];
 
-// const { , removeProductFromCart } = useCart();
-
-vi.mock("../../../hooks/useCart", () => ({
+vi.mock("@src/hooks/useCart", () => ({
   useCart: vi.fn(() => ({
     products: MOCKED_PRODUCTS,
     totalProductsPrice: MOCKED_PRODUCTS.reduce((acc, item) => {

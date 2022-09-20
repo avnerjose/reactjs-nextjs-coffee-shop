@@ -2,9 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { useRouter } from "next/router";
 import { describe, expect, it, vi } from "vitest";
 import { Header } from ".";
-import { useFilter } from "../../hooks";
-import { useCart } from "../../hooks/useCart";
-import { useScroll } from "../../hooks/useScroll";
+import { useFilter, useCart, useScroll } from "@hooks";
 
 vi.mock("next/link", () => ({
   __esModule: true,
@@ -19,19 +17,19 @@ vi.mock("next/router", () => ({
   })),
 }));
 
-vi.mock("../../hooks/useCart", () => ({
+vi.mock("@src/hooks/useCart", () => ({
   useCart: vi.fn(() => ({
     totalProductsAmount: 0,
   })),
 }));
 
-vi.mock("../../hooks/useScroll", () => ({
+vi.mock("@src/hooks/useScroll", () => ({
   useScroll: vi.fn(() => ({
     setSectionToScroll: vi.fn(),
   })),
 }));
 
-vi.mock("../../hooks/useFilter", () => ({
+vi.mock("@src/hooks/useFilter", () => ({
   useFilter: vi.fn(() => ({
     search: "",
     setSearch: vi.fn(),

@@ -1,11 +1,10 @@
 import { ArrowLeft } from "phosphor-react";
-import { useOrder } from "../../../hooks";
-import { formatToCurrency } from "../../../utils/format_money";
+import { useOrder } from "@hooks";
+import { formatToCurrency } from "@utils";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { InputWithErrorMessage } from "../../InputWithErrorMessage";
-import { CheckoutOrder } from "../../CheckoutOrder";
+import { InputWithErrorMessage, CheckoutOrder } from "@components";
 import { useEffect } from "react";
 
 interface Step2Props {

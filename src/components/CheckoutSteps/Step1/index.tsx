@@ -4,9 +4,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
-import { useOrder } from "../../../hooks";
-import { InputWithErrorMessage } from "../../InputWithErrorMessage";
-import { CheckoutOrder } from "../../CheckoutOrder";
+import { useOrder } from "@hooks";
+import { InputWithErrorMessage, CheckoutOrder } from "@components";
 import { useEffect } from "react";
 interface Step1Props {
   handleNext: () => void;

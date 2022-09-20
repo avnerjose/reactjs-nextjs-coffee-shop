@@ -2,8 +2,8 @@ import { ArrowLeft, ArrowRight } from "phosphor-react";
 import { useMediaQuery } from "react-responsive";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import { useGetFilterValuesQuery } from "../graphql/generated/graphql";
-import { useFilter } from "../hooks";
+import { useGetFilterValuesQuery } from "@codegen/graphql";
+import { useFilter } from "@hooks";
 import Image from "next/image";
 
 interface FilterProps {

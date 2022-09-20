@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ShoppingCart } from "phosphor-react";
-import { ProductItem } from "../ProductItem";
+import { ProductItem } from "@components";
 
 export function Popular() {
   return (

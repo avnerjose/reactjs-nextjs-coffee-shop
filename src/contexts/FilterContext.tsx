@@ -10,7 +10,7 @@ import {
 import {
   useGetAllProductsWithSearchLazyQuery,
   useGetProductsWithFilterLazyQuery,
-} from "../graphql/generated/graphql";
+} from "@codegen/graphql";
 
 type Product = {
   id: string;

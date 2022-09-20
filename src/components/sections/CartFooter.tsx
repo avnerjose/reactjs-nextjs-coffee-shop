@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { useCart, useOrder } from "../../hooks";
-import { formatToCurrency } from "../../utils/format_money";
+import { useCart, useOrder } from "@hooks";
+import { formatToCurrency } from "@utils";
 
 export function CartFooter() {
   const { totalProductsPrice } = useCart();

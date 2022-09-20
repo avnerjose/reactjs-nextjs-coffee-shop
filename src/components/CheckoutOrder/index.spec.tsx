@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, vi } from "vitest";
 import { CheckoutOrder } from ".";
-import { useCart } from "../../hooks";
+import { useCart } from "@hooks";
 
 type Product = {
   id: string;
@@ -31,14 +31,14 @@ const MOCKED_PRODUCTS: Product[] = [
   },
 ];
 
-vi.mock("../../hooks/useCart", () => ({
+vi.mock("@src/hooks/useCart", () => ({
   useCart: vi.fn(() => ({
     products: [],
     totalProductsPrice: 0,
   })),
 }));
 
-vi.mock("../../hooks/useOrder", () => ({
+vi.mock("@src/hooks/useOrder", () => ({
   useOrder: vi.fn(() => ({
     shippingPrice: 0,
   })),

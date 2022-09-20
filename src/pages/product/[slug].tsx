@@ -3,9 +3,9 @@ import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { Footer, Header, StarRating } from "@components";
-import { GetProductBySlugQuery } from "../../graphql/generated/graphql";
-import { ssrGetProductBySlug } from "../../graphql/generated/page";
-import { useCart } from "../../hooks";
+import { GetProductBySlugQuery } from "@codegen/graphql";
+import { ssrGetProductBySlug } from "@codegen/page";
+import { useCart } from "@hooks";
 import { withApollo } from "../../lib/Apollo/withApollo";
 
 type ProductProps = {

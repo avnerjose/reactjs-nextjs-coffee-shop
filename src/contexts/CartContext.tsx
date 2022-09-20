@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
-import { useGetProductByIdLazyQuery } from "../graphql/generated/graphql";
+import { useGetProductByIdLazyQuery } from "@codegen/graphql";
 
 interface CartProviderProps {
   children: ReactNode;
