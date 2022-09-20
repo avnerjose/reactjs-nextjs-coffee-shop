@@ -37,7 +37,7 @@ export const OrderContext = createContext<OrderContextProps>(
   {} as OrderContextProps
 );
 
-const DELIVERY_METHODS = [
+export const DELIVERY_METHODS = [
   {
     label: "Delivery",
     price: 10,
@@ -48,7 +48,7 @@ const DELIVERY_METHODS = [
   },
 ];
 
-const PAYMENT_METHODS = [
+export const PAYMENT_METHODS = [
   {
     label: "Credit Card",
     image: "/card_operators.png",
