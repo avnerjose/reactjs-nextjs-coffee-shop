@@ -17,7 +17,7 @@ type FilterOptions = {
   coffeeStrengths: string[];
 };
 
-const PRICE_OPTIONS = [
+export const PRICE_OPTIONS = [
   { min: 0, max: 50 },
   { min: 50, max: 100 },
   { min: 100, max: 150 },
@@ -95,7 +95,11 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center justify-center bg-brown-500 w-8 h-8 absolute top-[50%] right-[-1rem] rounded-full"
         >
-          {isOpen ? <ArrowLeft /> : <ArrowRight />}
+          {isOpen ? (
+            <ArrowLeft alt="arrow-left" />
+          ) : (
+            <ArrowRight alt="arrow-right" />
+          )}
         </button>
       )}
 
@@ -114,6 +118,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
           <div className="flex flex-col gap-2">
             <h3>Brand</h3>
             <select
+              data-testid="brand-select"
               value={brand === null ? "All" : brand}
               onChange={(e) =>
                 setBrand(e.target.value === "All" ? null : e.target.value)
@@ -131,6 +136,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
             <h3>Price</h3>
             <div className="flex items-center justify-between">
               <input
+                data-testid="min-price-input"
                 value={priceLimits.min ?? ""}
                 onChange={(e) =>
                   setPriceLimits((prev) => ({
@@ -143,6 +149,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
               />
               <span>-</span>
               <input
+                data-testid="max-price-input"
                 value={priceLimits.max ?? ""}
                 onChange={(e) =>
                   setPriceLimits((prev) => ({
@@ -159,6 +166,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
                 <label key={min} className="flex items-center gap-2">
                   {!max ? `More then ${min}` : `${min} - ${max}`}
                   <input
+                    data-testid="price-radio"
                     checked={selectedPrice === index}
                     onChange={() => {
                       setPriceLimits({ min, max });
@@ -176,6 +184,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
             <h3>Weight</h3>
             <select
               value={weight === null ? "All" : weight}
+              data-testid="weight-select"
               onChange={(e) =>
                 setWeight(
                   e.target.value === "All" ? null : parseFloat(e.target.value)
@@ -194,6 +203,7 @@ export function Filter({ isOpen, setIsOpen }: FilterProps) {
             <h3>Coffee Strength</h3>
             <select
               value={coffeeStrength === null ? "All" : coffeeStrength}
+              data-testid="coffee-strength-select"
               onChange={(e) =>
                 setCoffeeStrength(
                   e.target.value === "All" ? null : parseFloat(e.target.value)
