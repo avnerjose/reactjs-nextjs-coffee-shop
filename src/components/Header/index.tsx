@@ -67,7 +67,7 @@ export function Header({ isFixed = false }: HeaderProps) {
             />
           )}
           <NextLink href="/cart">
-            <div className="relative cursor-pointer">
+            <div data-test="cart-link" className="relative cursor-pointer">
               <ShoppingCart className="text-xl  text-white" />
               {totalProductsAmount > 0 && (
                 <span className="flex items-center justify-center absolute top-[-0.8rem] right-[-0.8rem] text-xs bg-red-500 text-white rounded-full w-5 h-5">
