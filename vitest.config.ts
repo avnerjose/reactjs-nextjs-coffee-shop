@@ -28,7 +28,15 @@ export default defineConfig({
     coverage: {
       all: true,
       provider: "istanbul",
-      exclude: ["src/graphql/", "node_modules/", "src/lib/"],
+      exclude: [
+        "src/graphql/",
+        "node_modules/",
+        "src/lib/",
+        "src/hooks/useCart.ts",
+        "src/hooks/useOrder.ts",
+        "src/hooks/useFilter.ts",
+        "src/hooks/useScroll.ts",
+      ],
       include: ["src/"],
     },
   },
