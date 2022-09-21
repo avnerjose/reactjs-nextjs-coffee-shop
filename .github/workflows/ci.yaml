@@ -18,3 +18,13 @@ jobs:
       - name: Run unit tests
         run: |
           npm run test
+
+      - name: Generate unit test coverage report 
+        run: |
+          npm run test:coverage
+        uses: actions/upload-artifact@v3 
+        with: 
+          name: Relatório de testes 
+          path: coverage/
+        
+      
