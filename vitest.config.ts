@@ -36,6 +36,8 @@ export default defineConfig({
         "src/hooks/useOrder.ts",
         "src/hooks/useFilter.ts",
         "src/hooks/useScroll.ts",
+        "src/pages/_app.tsx",
+        "src/pages/_document.tsx",
       ],
       include: ["src/"],
     },
