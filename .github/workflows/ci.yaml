@@ -7,11 +7,14 @@ jobs:
   unit-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
           node-version: "14.x"
+      
       - name: Install dependencies
         run: npm i
 
@@ -24,5 +27,28 @@ jobs:
         with: 
           name: Relatório de testes 
           path: coverage/
-        
+
+  cypress-tests:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3 
+        with:
+          node-version: "14.x"
+      
+      - name: Install dependencies
+        run: npm i 
+      
+      - name: Cypress tests
+        uses: cypress-io/github-actions@v4
+        with: 
+          browser: chrome
+          build: npm run build
+          start: npm start
+      
+
+
       
