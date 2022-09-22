@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, vi } from "vitest";
 import { Step1 } from ".";
 import { useOrder } from "@hooks";
@@ -182,7 +176,7 @@ describe("Step1 component", () => {
         lastName: "Mocked last name",
         phoneNumber: "+12 (34) 56789-1290",
         email: "mocked@email.com",
-      }),
+      })
     );
     expect(mockedHandleNext).toHaveBeenCalled();
   });

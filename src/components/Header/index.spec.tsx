@@ -55,7 +55,7 @@ describe("Header Component", () => {
     render(<Header />);
 
     expect(
-      screen.queryByPlaceholderText("Search for products here"),
+      screen.queryByPlaceholderText("Search for products here")
     ).not.toBeInTheDocument();
   });
 
@@ -67,7 +67,7 @@ describe("Header Component", () => {
     render(<Header />);
 
     expect(
-      screen.queryByPlaceholderText("Search for products here"),
+      screen.queryByPlaceholderText("Search for products here")
     ).toBeInTheDocument();
   });
 

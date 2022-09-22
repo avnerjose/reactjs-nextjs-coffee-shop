@@ -1,7 +1,7 @@
 import { ApolloProvider } from "@apollo/client";
 import type { AppProps } from "next/app";
 import { CartProvider, OrderProvider, ScrollProvider } from "@contexts";
-import { withApollo, getApolloClient } from "../lib/Apollo/withApollo";
+import { getApolloClient } from "../lib/Apollo/withApollo";
 import "../styles/global.css";
 
 function MyApp({ Component, pageProps }: AppProps) {

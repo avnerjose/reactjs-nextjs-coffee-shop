@@ -10,8 +10,8 @@ describe("AboutUs section component", () => {
     expect(screen.getByAltText("Separator")).toBeInTheDocument();
     expect(
       screen.getByText(
-        /Lorem ipsum dolor sit amet consectetur adipisicing elit/,
-      ),
+        /Lorem ipsum dolor sit amet consectetur adipisicing elit/
+      )
     ).toBeInTheDocument();
   });
 });

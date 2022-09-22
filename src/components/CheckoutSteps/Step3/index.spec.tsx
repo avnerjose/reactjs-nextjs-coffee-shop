@@ -54,7 +54,7 @@ vi.mock("@src/hooks/useOrder", () => ({
 describe("Step3 component", () => {
   beforeEach(() => {
     render(
-      <Step3 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />,
+      <Step3 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />
     );
   });
 

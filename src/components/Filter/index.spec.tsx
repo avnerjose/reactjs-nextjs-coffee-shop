@@ -1,10 +1,9 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, vi } from "vitest";
 import { Context as ResponsiveContext } from "react-responsive";
 import { Filter, PRICE_OPTIONS } from ".";
 import { ReactNode } from "react";
 import { useFilter } from "@hooks";
-import { useGetFilterValues } from "@codegen/page";
 
 const mockedFilterValuesReturn = {
   allProducts: {
@@ -58,12 +57,12 @@ describe("Filter component", () => {
       ({ node: { brand, coffee_strength, weight } }) => {
         expect(screen.getAllByText(brand).length).toBeGreaterThanOrEqual(1);
         expect(
-          screen.getAllByText(coffee_strength).length,
+          screen.getAllByText(coffee_strength).length
         ).toBeGreaterThanOrEqual(1);
         expect(screen.getAllByText(weight).length).toBeGreaterThanOrEqual(1);
-      },
+      }
     );
-    PRICE_OPTIONS.forEach(({ max, min }, index) => {
+    PRICE_OPTIONS.forEach(({ max, min }) => {
       switch (max) {
         case null:
           expect(screen.getByText(`More then ${min}`)).toBeInTheDocument();
@@ -153,7 +152,7 @@ describe("Filter component", () => {
 
     render(<Filter isOpen={true} setIsOpen={vi.fn()} />);
     const brandOptions = mockedFilterValuesReturn.allProducts.edges.map(
-      ({ node }) => node.brand,
+      ({ node }) => node.brand
     );
     brandOptions.push("All");
 
@@ -185,7 +184,7 @@ describe("Filter component", () => {
 
     render(<Filter isOpen={true} setIsOpen={vi.fn()} />);
     const weightOptions = mockedFilterValuesReturn.allProducts.edges.map(
-      ({ node }) => String(node.weight),
+      ({ node }) => String(node.weight)
     );
     weightOptions.push("All");
 
@@ -218,7 +217,7 @@ describe("Filter component", () => {
     render(<Filter isOpen={true} setIsOpen={vi.fn()} />);
     const coffeeStrengthOptions =
       mockedFilterValuesReturn.allProducts.edges.map(({ node }) =>
-        String(node.coffee_strength),
+        String(node.coffee_strength)
       );
     coffeeStrengthOptions.push("All");
 
@@ -232,7 +231,7 @@ describe("Filter component", () => {
           break;
         default:
           expect(setCoffeeStrengthMocked).toHaveBeenCalledWith(
-            parseFloat(option),
+            parseFloat(option)
           );
           break;
       }

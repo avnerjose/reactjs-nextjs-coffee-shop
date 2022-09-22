@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Filter, Header, ProductItem } from "@components";
 import { withFilter } from "@contexts";
 import { GetAllProductsQuery } from "@codegen/graphql";
@@ -10,18 +10,7 @@ type CatalogProps = {
   data: GetAllProductsQuery;
 };
 
-type Product = {
-  id: string;
-  name: string;
-  slug: string;
-  image: {
-    url: string;
-  };
-  price: number;
-  category: string;
-};
-
-const Catalog: NextPage<CatalogProps> = (props) => {
+const Catalog: NextPage<CatalogProps> = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { products } = useFilter();
 

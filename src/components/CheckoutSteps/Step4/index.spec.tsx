@@ -73,7 +73,7 @@ describe("Step4 component", () => {
       <Step4
         handleReturn={mockedHandleReturn}
         setActiveStep={mockedSetActiveStep}
-      />,
+      />
     );
   });
 

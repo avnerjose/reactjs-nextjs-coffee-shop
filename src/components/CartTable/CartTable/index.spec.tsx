@@ -66,7 +66,7 @@ describe("CartTable component", () => {
     const table = screen.getByRole("table");
 
     expect(table.querySelectorAll("tr").length).toBe(
-      MOCKED_PRODUCTS.length + 1,
+      MOCKED_PRODUCTS.length + 1
     );
   });
 });
