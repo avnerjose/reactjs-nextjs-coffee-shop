@@ -43,7 +43,7 @@ jobs:
         run: npm i
 
       - name: Run linting tests
-        run: npm run lint
+        run: npm run lint --fix
 
   cypress-tests:
     runs-on: ubuntu-latest
