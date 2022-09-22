@@ -73,3 +73,37 @@ jobs:
         with:
           name: Vídeos dos testes cypress
           path: cypress/videos
+
+  build:
+    runs-on: ubuntu-latest 
+    needs: cypress-tests 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14.x"
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build application
+        run: npm run build
+
+      - name: Save project build in artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Aplicação empacotada 
+          path: .next/
+
+  notification:
+    runs-on: ubuntu-latest
+    needs: build
+    steps: 
+      - name: Sending success message email
+        uses: actions/checkout@v3
+      - run:  sh .github/scripts/send_email.sh
+        env:
+          EMAIL: avnerj.g.r@gmail.com
