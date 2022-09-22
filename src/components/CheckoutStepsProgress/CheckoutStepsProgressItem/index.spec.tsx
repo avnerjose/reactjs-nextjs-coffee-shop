@@ -8,7 +8,7 @@ describe("CheckoutStepsProgressItem component", () => {
         label="mocked-label"
         activeStep={1}
         index={1}
-      />
+      />,
     );
 
     expect(screen.getByText("mocked-label")).toBeInTheDocument();

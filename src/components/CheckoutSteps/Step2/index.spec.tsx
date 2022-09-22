@@ -43,7 +43,7 @@ const mockedHandleReturn = vi.fn();
 
 const setup = () => {
   render(
-    <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />
+    <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />,
   );
 
   fireEvent.blur(screen.getByPlaceholderText("Street"));
@@ -71,7 +71,7 @@ vi.mock("@src/hooks/useOrder", () => ({
 describe("Step2 component", () => {
   it("should render correctly", () => {
     render(
-      <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />
+      <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />,
     );
 
     expect(screen.getByText("Delivery Address")).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe("Step2 component", () => {
 
   it("should be able to click on return button", () => {
     render(
-      <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />
+      <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />,
     );
 
     fireEvent.click(screen.getByText("Return"));
@@ -101,7 +101,7 @@ describe("Step2 component", () => {
     } as any);
 
     render(
-      <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />
+      <Step2 handleNext={mockedHandleNext} handleReturn={mockedHandleReturn} />,
     );
 
     fireEvent.click(screen.getByText(DELIVERY_METHODS[1].label));

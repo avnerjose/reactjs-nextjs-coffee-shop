@@ -47,11 +47,11 @@ describe("CartTableItem component", () => {
     expect(screen.getByAltText(mockedProduct.name)).toBeInTheDocument();
     expect(
       screen.getByText(
-        new RegExp(`${mockedProduct.price * mockedProduct.amount}`)
-      )
+        new RegExp(`${mockedProduct.price * mockedProduct.amount}`),
+      ),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(mockedProduct.smallDescription)
+      screen.getByText(mockedProduct.smallDescription),
     ).toBeInTheDocument();
   });
 

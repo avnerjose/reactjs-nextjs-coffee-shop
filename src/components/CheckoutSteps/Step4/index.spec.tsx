@@ -1,10 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, vi } from "vitest";
 import { Step4 } from ".";
-import {
-  DELIVERY_METHODS,
-  PAYMENT_METHODS,
-} from "@contexts";
+import { DELIVERY_METHODS, PAYMENT_METHODS } from "@contexts";
 
 const mockedHandleReturn = vi.fn();
 const mockedSetActiveStep = vi.fn();
@@ -76,7 +73,7 @@ describe("Step4 component", () => {
       <Step4
         handleReturn={mockedHandleReturn}
         setActiveStep={mockedSetActiveStep}
-      />
+      />,
     );
   });
 

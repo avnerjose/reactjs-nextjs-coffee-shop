@@ -58,7 +58,7 @@ export function Step4({ handleReturn, setActiveStep }: Step4Props) {
               <li>
                 {deliveryMethods[selectedDeliveryMethod].label} -{" "}
                 {formatToCurrency(
-                  deliveryMethods[selectedDeliveryMethod].price
+                  deliveryMethods[selectedDeliveryMethod].price,
                 )}
               </li>
             </ul>

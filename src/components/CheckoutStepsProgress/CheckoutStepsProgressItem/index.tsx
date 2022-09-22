@@ -13,7 +13,7 @@ export function CheckoutStepsProgressItem({
   activeStep,
 }: CheckoutStepsProgressItemProps) {
   const [state, setState] = useState<"active" | "inactive" | "completed">(
-    "inactive"
+    "inactive",
   );
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function CheckoutStepsProgressItem({
           "before:content-['✔'] before:border-brown-500 before:text-brown-500":
             state === "completed",
           "after:bg-brown-500": state === "active" || state === "completed",
-        }
+        },
       )}
     >
       {label}

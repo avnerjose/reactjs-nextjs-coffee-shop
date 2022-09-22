@@ -98,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         slug: slug?.toString() || "",
       },
     },
-    ctx
+    ctx,
   );
 };
 
@@ -107,5 +107,5 @@ export default withApollo(
     variables: {
       slug: args?.query?.slug?.toString() || "",
     },
-  }))(Product)
+  }))(Product),
 );

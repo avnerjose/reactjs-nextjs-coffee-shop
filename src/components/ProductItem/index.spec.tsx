@@ -33,7 +33,7 @@ describe("ProductItem component", () => {
 
     expect(screen.getByText(mockedProduct.name)).toHaveAttribute(
       "href",
-      `/product/${mockedProduct.slug}`
+      `/product/${mockedProduct.slug}`,
     );
   });
 

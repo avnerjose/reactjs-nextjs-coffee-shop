@@ -21,7 +21,7 @@ describe("SuccessfulPurchaseModal component", () => {
     render(<SuccessfulPurchaseModal isOpen />);
 
     expect(
-      screen.getByText("Your purchase was successful!")
+      screen.getByText("Your purchase was successful!"),
     ).toBeInTheDocument();
   });
 
@@ -29,7 +29,7 @@ describe("SuccessfulPurchaseModal component", () => {
     render(<SuccessfulPurchaseModal isOpen={false} />);
 
     expect(
-      screen.queryByText("Your purchase was successful!")
+      screen.queryByText("Your purchase was successful!"),
     ).not.toBeInTheDocument();
   });
 

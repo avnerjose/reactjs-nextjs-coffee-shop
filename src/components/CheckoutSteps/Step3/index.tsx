@@ -8,11 +8,8 @@ interface Step3Props {
 }
 
 export function Step3({ handleNext, handleReturn }: Step3Props) {
-  const {
-    paymentMethods,
-    selectedPaymentMethod,
-    setSelectedPaymentMethod,
-  } = useOrder();
+  const { paymentMethods, selectedPaymentMethod, setSelectedPaymentMethod } =
+    useOrder();
 
   return (
     <div className="flex">

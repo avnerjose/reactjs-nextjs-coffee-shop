@@ -23,7 +23,7 @@ export type ApolloClientContext = GetServerSidePropsContext;
 
 export function getApolloClient(
   ctx?: ApolloClientContext,
-  ssrCache?: NormalizedCacheObject
+  ssrCache?: NormalizedCacheObject,
 ) {
   const httpLink = createPrismicLink({
     uri: prismic.getGraphQLEndpoint(repositoryName),

@@ -27,7 +27,7 @@ export function StarRating({ rating }: StarRatingProps) {
 
     const emptyStars = Array.from(
       { length: 5 - newStars.length },
-      () => "empty"
+      () => "empty",
     );
 
     setStars([...newStars, ...emptyStars]);

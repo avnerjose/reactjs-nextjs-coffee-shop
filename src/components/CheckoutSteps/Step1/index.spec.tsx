@@ -182,7 +182,7 @@ describe("Step1 component", () => {
         lastName: "Mocked last name",
         phoneNumber: "+12 (34) 56789-1290",
         email: "mocked@email.com",
-      })
+      }),
     );
     expect(mockedHandleNext).toHaveBeenCalled();
   });
