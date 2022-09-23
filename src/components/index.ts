@@ -21,3 +21,4 @@ export * from "./sections/CheckoutHero";
 export * from "./sections/Hero";
 export * from "./sections/Popular";
 export * from "./sections/Stats";
+export * from "./sections/CartEmptyState";
