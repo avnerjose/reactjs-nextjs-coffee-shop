@@ -16,6 +16,15 @@ module.exports = {
         checkout:
           "linear-gradient(rgba(34,32,30,.3), rgba(34,32,30,.3)), url('/checkout_background.jpg') ",
       },
+      animation: {
+        "ltr-linear-infinite": "move-bg 10s infinite",
+      },
+      keyframes: {
+        "move-bg": {
+          "0%": { "background-size": "100%" },
+          "100%": { "background-size": "110%" },
+        },
+      },
       colors: {
         dark: "#22201E",
         green: {
@@ -24,6 +33,9 @@ module.exports = {
         beige: "#FFF9F1",
         gray: {
           200: "#DBDBDB",
+        },
+        orange: {
+          500: "#C8653B",
         },
         brown: {
           500: "#5A351E",

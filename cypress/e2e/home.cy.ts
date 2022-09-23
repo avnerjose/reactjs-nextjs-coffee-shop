@@ -5,11 +5,13 @@ describe("Home page", () => {
 
   context("home page content", () => {
     it("hero section should have correct values", () => {
-      cy.getByDataTest("hero-heading").should("contain", "Coffee Shop");
+      cy.getByDataTest("hero-heading").should(
+        "contain",
+        "Start your day with a black coffee"
+      );
       cy.getByDataTest("hero-description").should(
         "contain",
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia deleniti " +
-          "modi corrupti, adipisci rem temporibus asperiores nobis porro illo"
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia deleniti modi corrupti, adipisci rem temporibus."
       );
     });
 
@@ -52,11 +54,16 @@ describe("Home page", () => {
       cy.contains("Avner José").should("be.visible");
       cy.contains(`${new Date().getFullYear()}`).should("be.visible");
     });
+
+    it("should be able to navigate to catalog on CTA button click", () => {
+      cy.getByDataTest("shop-here-button").click();
+      cy.location("pathname").should("eq", "/catalog");
+    });
   });
 
   context("Home nav header navigation", () => {
     it("should be able to navigate to catalog page", () => {
-      cy.get('[href="/catalog"]').click();
+      cy.contains("Catalog").click();
       cy.location("pathname").should("eq", "/catalog");
     });
 
