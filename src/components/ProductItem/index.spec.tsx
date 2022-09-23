@@ -5,7 +5,7 @@ import { useCart } from "@hooks";
 
 vi.mock("@src/hooks/useCart.ts", () => ({
   useCart: vi.fn(() => ({
-    addProductToCart: vi.fn(),
+    handleAddProductToCart: vi.fn(),
   })),
 }));
 
@@ -38,9 +38,9 @@ describe("ProductItem component", () => {
   });
 
   it("should add product to cart on click", () => {
-    const mockedAddProductToCart = vi.fn();
+    const mockedHandleAddProductToCart = vi.fn();
     vi.mocked(useCart).mockReturnValue({
-      addProductToCart: mockedAddProductToCart,
+      handleAddProductToCart: mockedHandleAddProductToCart,
     } as any);
 
     render(<ProductItem product={mockedProduct} />);
@@ -49,6 +49,6 @@ describe("ProductItem component", () => {
 
     fireEvent.click(shoppingCartButton);
 
-    expect(mockedAddProductToCart).toHaveBeenCalledWith(mockedProduct.id);
+    expect(mockedHandleAddProductToCart).toHaveBeenCalledWith(mockedProduct.id);
   });
 });

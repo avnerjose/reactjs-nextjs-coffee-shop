@@ -14,7 +14,7 @@ type ProductProps = {
 
 const Product: NextPage<ProductProps> = ({ data }) => {
   const [amount, setAmount] = useState(1);
-  const { addProductToCart } = useCart();
+  const { handleAddProductToCart } = useCart();
 
   const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (parseInt(e.target.value) < 1) {
@@ -74,7 +74,7 @@ const Product: NextPage<ProductProps> = ({ data }) => {
               />
               <button
                 onClick={() =>
-                  addProductToCart(String(product?._meta?.id), amount)
+                  handleAddProductToCart(String(product?._meta?.id), amount)
                 }
                 className="bg-brown-500 rounded-md text-white px-12 py-3 "
               >

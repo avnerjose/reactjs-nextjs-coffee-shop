@@ -22,7 +22,7 @@ interface CartContextProps {
   totalProductsAmount: number;
   totalProductsPrice: number;
   products: Product[];
-  addProductToCart: (productId: string, amount?: number) => Promise<void>;
+  handleAddProductToCart: (productId: string, amount?: number) => Promise<void>;
   removeProductFromCart: (productId: string) => void;
   updateProductAmount: (productId: string, amount: number) => void;
   cleanCart: () => void;
@@ -34,6 +34,7 @@ export const CartContext = createContext<CartContextProps>(
 
 function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [amountToAdd, setAmountToAdd] = useState(0);
   const [getProductById, { data, loading }] = useGetProductByIdLazyQuery();
 
   const loadCartFromLocalStorage = () => {
@@ -46,7 +47,10 @@ function CartProvider({ children }: CartProviderProps) {
     return [];
   };
 
-  const addProductToCart = async (productId: string, amount: number = 1) => {
+  const handleAddProductToCart = async (
+    productId: string,
+    amount: number = 1
+  ) => {
     const productAlreadyExists = products.find(
       (product) => product.id === productId
     );
@@ -66,28 +70,30 @@ function CartProvider({ children }: CartProviderProps) {
           id: productId,
         },
       });
-
-      if (data && !loading) {
-        const apiProduct =
-          data?.allProducts?.edges && data?.allProducts?.edges[0]?.node;
-
-        const product: Product = {
-          id: String(apiProduct?._meta.id),
-          slug: String(apiProduct?._meta.uid),
-          name: String(apiProduct?.name),
-          category: String(apiProduct?.category),
-          image: {
-            url: String(apiProduct?.image.url),
-          },
-          smallDescription: String(apiProduct?.small_description),
-          price: Number(apiProduct?.price),
-          amount,
-        };
-
-        setProducts((prev) => [...prev, product]);
-        updateCartLocalStorage([...products, product]);
-      }
+      setAmountToAdd(amount);
     }
+  };
+
+  const addNewProductToCart = () => {
+    const apiProduct =
+      data?.allProducts?.edges && data?.allProducts?.edges[0]?.node;
+
+    const product: Product = {
+      id: String(apiProduct?._meta.id),
+      slug: String(apiProduct?._meta.uid),
+      name: String(apiProduct?.name),
+      category: String(apiProduct?.category),
+      image: {
+        url: String(apiProduct?.image.url),
+      },
+      smallDescription: String(apiProduct?.small_description),
+      price: Number(apiProduct?.price),
+      amount: amountToAdd,
+    };
+
+    setProducts((prev) => [...prev, product]);
+    updateCartLocalStorage([...products, product]);
+    setAmountToAdd(0);
   };
 
   const removeProductFromCart = (productId: string) => {
@@ -137,6 +143,12 @@ function CartProvider({ children }: CartProviderProps) {
   );
 
   useEffect(() => {
+    if (data && amountToAdd !== 0) {
+      addNewProductToCart();
+    }
+  }, [data, amountToAdd]);
+
+  useEffect(() => {
     setProducts(loadCartFromLocalStorage());
   }, []);
 
@@ -144,7 +156,7 @@ function CartProvider({ children }: CartProviderProps) {
     <CartContext.Provider
       value={{
         cleanCart,
-        addProductToCart,
+        handleAddProductToCart,
         removeProductFromCart,
         updateProductAmount,
         totalProductsAmount,
