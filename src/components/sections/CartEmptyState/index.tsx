@@ -3,7 +3,7 @@ import { ShoppingCart } from "phosphor-react";
 
 export function CartEmptyState() {
   return (
-    <section className="flex flex-col gap-4 items-center justify-center mb-8">
+    <section className="flex flex-col gap-4 items-center justify-center my-8">
       <div className="flex items-center justify-center bg-brown-500 p-4 rounded-full">
         <ShoppingCart size={100} color="white" />
       </div>
