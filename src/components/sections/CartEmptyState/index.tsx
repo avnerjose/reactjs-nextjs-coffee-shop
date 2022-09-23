@@ -10,7 +10,7 @@ export function CartEmptyState() {
       <div className="flex flex-col gap-1 items-center justify-center ">
         <h2 className="font-title text-3xl">Your cart is empty</h2>
         <p className="text-sm">
-          Looks like you haven't added any products to your cart yet
+          Looks like you have not added any products to your cart yet
         </p>
       </div>
       <Link href="/catalog" passHref>

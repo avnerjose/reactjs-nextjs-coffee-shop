@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Step1,
   Step2,
@@ -11,9 +11,13 @@ import {
   CheckoutStepsProgress,
   SuccessfulPurchaseModal,
 } from "@components";
+import { useCart } from "@hooks";
+import { useRouter } from "next/router";
 
 const CheckOut: NextPage = () => {
   const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(0);
+  const router = useRouter();
+  const { totalProductsAmount, isCartLoading } = useCart();
 
   const HandleStep = () => {
     switch (activeStep) {
@@ -44,6 +48,12 @@ const CheckOut: NextPage = () => {
         return <Step1 handleNext={() => setActiveStep(1)} />;
     }
   };
+
+  useEffect(() => {
+    if (totalProductsAmount === 0 && !isCartLoading) {
+      router.push("/");
+    }
+  }, [totalProductsAmount, isCartLoading]);
 
   return (
     <>

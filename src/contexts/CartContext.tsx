@@ -22,6 +22,7 @@ interface CartContextProps {
   totalProductsAmount: number;
   totalProductsPrice: number;
   products: Product[];
+  isCartLoading: boolean;
   handleAddProductToCart: (productId: string, amount?: number) => Promise<void>;
   removeProductFromCart: (productId: string) => void;
   updateProductAmount: (productId: string, amount: number) => void;
@@ -35,7 +36,8 @@ export const CartContext = createContext<CartContextProps>(
 function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [amountToAdd, setAmountToAdd] = useState(0);
-  const [getProductById, { data, loading }] = useGetProductByIdLazyQuery();
+  const [getProductById, { data }] = useGetProductByIdLazyQuery();
+  const [isCartLoading, setIsCartLoading] = useState(true);
 
   const loadCartFromLocalStorage = () => {
     const storedProducts = localStorage.getItem("@CoffeeShop:cart");
@@ -47,10 +49,7 @@ function CartProvider({ children }: CartProviderProps) {
     return [];
   };
 
-  const handleAddProductToCart = async (
-    productId: string,
-    amount: number = 1
-  ) => {
+  const handleAddProductToCart = async (productId: string, amount = 1) => {
     const productAlreadyExists = products.find(
       (product) => product.id === productId
     );
@@ -149,7 +148,9 @@ function CartProvider({ children }: CartProviderProps) {
   }, [data, amountToAdd]);
 
   useEffect(() => {
+    setIsCartLoading(true);
     setProducts(loadCartFromLocalStorage());
+    setIsCartLoading(false);
   }, []);
 
   return (
@@ -162,6 +163,7 @@ function CartProvider({ children }: CartProviderProps) {
         totalProductsAmount,
         totalProductsPrice,
         products,
+        isCartLoading,
       }}
     >
       {children}
