@@ -1,3 +1,5 @@
+[![Coffee Shop CI](https://github.com/avnerjose/reactjs-nextjs-coffee-shop/actions/workflows/ci.yaml/badge.svg)](https://github.com/avnerjose/reactjs-nextjs-coffee-shop/actions/workflows/ci.yaml)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
