@@ -71,6 +71,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
         <h3 className="font-title text-lg mb-4">Delivery Address</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputWithErrorMessage
+            data-test="street-input"
             control={control}
             hasError={!!errors.street}
             hasTouched={!!touchedFields.street}
@@ -81,6 +82,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
           />
           <div className="flex gap-8 my-4">
             <InputWithErrorMessage
+              data-test="zip-code-input"
               control={control}
               hasError={!!errors.zipCode}
               hasTouched={!!touchedFields.zipCode}
@@ -92,6 +94,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
               mask="99999-999"
             />
             <InputWithErrorMessage
+              data-test="number-input"
               control={control}
               hasError={!!errors.number}
               hasTouched={!!touchedFields.number}
@@ -104,6 +107,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
           </div>
           <div className="flex gap-8 mb-4">
             <InputWithErrorMessage
+              data-test="city-input"
               control={control}
               hasError={!!errors.city}
               hasTouched={!!touchedFields.city}
@@ -113,6 +117,7 @@ export function Step2({ handleNext, handleReturn }: Step2Props) {
               errorMessage={errors.city?.message}
             />
             <InputWithErrorMessage
+              data-test="neighborhood-input"
               control={control}
               hasError={!!errors.neighborhood}
               hasTouched={!!touchedFields.neighborhood}

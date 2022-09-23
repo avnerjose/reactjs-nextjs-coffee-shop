@@ -58,6 +58,7 @@ export function Step1({ handleNext }: Step1Props) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex items-start gap-8 mb-4">
             <InputWithErrorMessage
+              data-test="first-name-input"
               control={control}
               register={register}
               name="firstName"
@@ -67,6 +68,7 @@ export function Step1({ handleNext }: Step1Props) {
               errorMessage={errors.firstName?.message}
             />
             <InputWithErrorMessage
+              data-test="last-name-input"
               control={control}
               register={register}
               name="lastName"
@@ -78,6 +80,7 @@ export function Step1({ handleNext }: Step1Props) {
           </div>
           <div className="flex items-start gap-8 mb-4">
             <InputWithErrorMessage
+              data-test="phone-number-input"
               control={control}
               register={register}
               name="phoneNumber"
@@ -89,6 +92,7 @@ export function Step1({ handleNext }: Step1Props) {
               mask="+99 (99) 99999-9999"
             />
             <InputWithErrorMessage
+              data-test="email-input"
               control={control}
               register={register}
               name="email"

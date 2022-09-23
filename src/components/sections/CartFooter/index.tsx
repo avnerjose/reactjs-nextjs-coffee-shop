@@ -32,7 +32,10 @@ export function CartFooter() {
             </span>
           </div>
           <Link href="/checkout">
-            <a className="bg-white transition-colors h-full border text-brown-500 font-bold text-xs flex items-center justify-center p-3 rounded-3xl uppercase hover:bg-transparent hover:text-white  hover:border-white">
+            <a
+              data-test="checkout-button"
+              className="bg-white transition-colors h-full border text-brown-500 font-bold text-xs flex items-center justify-center p-3 rounded-3xl uppercase hover:bg-transparent hover:text-white  hover:border-white"
+            >
               Proceed to checkout
             </a>
           </Link>
