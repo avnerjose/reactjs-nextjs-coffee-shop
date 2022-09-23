@@ -104,6 +104,6 @@ jobs:
     steps: 
       - name: Sending success message email
         uses: actions/checkout@v3
-      - run:  sh scripts/send_email.sh
+      - run:  sh .github/scripts/send_email.sh
         env:
           EMAIL: avnerj.g.r@gmail.com
