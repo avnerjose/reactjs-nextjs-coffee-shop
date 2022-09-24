@@ -37,6 +37,9 @@
       ],
       "@codegen/page": [
         "src/graphql/generated/page.tsx"
+      ],
+      "@decorators": [
+        ".storybook/decorators/index.ts"
       ]
     }
   },
