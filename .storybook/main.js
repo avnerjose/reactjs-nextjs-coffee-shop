@@ -10,6 +10,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "storybook-addon-apollo-client",
+    "storybook-addon-next-router",
     {
       /**
        * Fix Storybook issue with PostCSS@8

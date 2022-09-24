@@ -1,6 +1,7 @@
 // .storybook/preview.js
 
 import { MockedProvider } from "@apollo/client/testing";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 import "../src/styles/global.css";
 import * as NextImage from "next/image";
 
@@ -24,5 +25,8 @@ export const parameters = {
   },
   apolloClient: {
     MockedProvider,
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
 };
