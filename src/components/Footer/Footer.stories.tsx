@@ -1,10 +1,9 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Footer } from ".";
+import { ComponentMeta } from "@storybook/react";
+import { Footer as FooterComponent } from ".";
 
 export default {
-  component: Footer,
-} as ComponentMeta<typeof Footer>;
+  title: "Components/Footer",
+  component: FooterComponent,
+} as ComponentMeta<typeof FooterComponent>;
 
-const Template: ComponentStory<typeof Footer> = () => <Footer />;
-
-export const Default = Template.bind({});
+export const Footer = () => <FooterComponent />;
