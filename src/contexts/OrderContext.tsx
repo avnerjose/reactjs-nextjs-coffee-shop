@@ -19,7 +19,7 @@ interface OrderProviderProps {
   children: ReactNode;
 }
 
-interface OrderContextProps {
+export interface OrderContextProps {
   deliveryMethods: typeof DELIVERY_METHODS;
   paymentMethods: typeof PAYMENT_METHODS;
   selectedDeliveryMethod: number;

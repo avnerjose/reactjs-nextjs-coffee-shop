@@ -5,7 +5,7 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
-type Product = {
+export type Product = {
   id: string;
   name: string;
   slug: string;
@@ -18,12 +18,12 @@ type Product = {
   amount: number;
 };
 
-interface CartContextProps {
+export interface CartContextProps {
   totalProductsAmount: number;
   totalProductsPrice: number;
   products: Product[];
   isCartLoading: boolean;
-  handleAddProductToCart: (productId: string, amount?: number) => Promise<void>;
+  handleAddProductToCart: (productId: string, amount?: number) => void;
   removeProductFromCart: (productId: string) => void;
   updateProductAmount: (productId: string, amount: number) => void;
   cleanCart: () => void;
@@ -49,7 +49,7 @@ function CartProvider({ children }: CartProviderProps) {
     return [];
   };
 
-  const handleAddProductToCart = async (productId: string, amount = 1) => {
+  const handleAddProductToCart = (productId: string, amount = 1) => {
     const productAlreadyExists = products.find(
       (product) => product.id === productId
     );
