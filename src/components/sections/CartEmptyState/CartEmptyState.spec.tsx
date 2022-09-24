@@ -9,7 +9,7 @@ describe("Cart Empty state component", () => {
     expect(screen.getByText("Your cart is empty")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Looks like you haven't added any products to your cart yet"
+        "Looks like you have not added any products to your cart yet"
       )
     ).toBeInTheDocument();
     expect(screen.getByText("Add products to cart")).toHaveAttribute(
