@@ -1,5 +1,6 @@
 // .storybook/preview.js
 
+import { MockedProvider } from "@apollo/client/testing";
 import "../src/styles/global.css";
 import * as NextImage from "next/image";
 
@@ -20,5 +21,8 @@ export const parameters = {
   },
   previewTabs: {
     "storybook/docs/panel": { index: -1 },
+  },
+  apolloClient: {
+    MockedProvider,
   },
 };

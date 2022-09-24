@@ -9,6 +9,7 @@ module.exports = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
+    "storybook-addon-apollo-client",
     {
       /**
        * Fix Storybook issue with PostCSS@8
@@ -25,7 +26,7 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
-  webpackFinal: (config) => {
+  webpackFinal: async (config) => {
     /**
      * Add support for alias-imports
      * @see https://github.com/storybookjs/storybook/issues/11989#issuecomment-715524391
@@ -33,6 +34,34 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve?.alias,
       "@": [path.resolve(__dirname, "../src/"), path.resolve(__dirname, "../")],
+      "@components": [
+        path.resolve(__dirname, "../src/components/index.ts"),
+        path.resolve(__dirname, "../src/components/index.ts"),
+      ],
+      "@hooks": [
+        path.resolve(__dirname, "../src/hooks/index.ts"),
+        path.resolve(__dirname, "../src/hooks/index.ts"),
+      ],
+      "@utils": [
+        path.resolve(__dirname, "../src/utils/index.ts"),
+        path.resolve(__dirname, "../src/utils/index.ts"),
+      ],
+      "@contexts": [
+        path.resolve(__dirname, "../src/contexts/index.ts"),
+        path.resolve(__dirname, "../src/contexts/index.ts"),
+      ],
+      "@codegen/graphql": [
+        path.resolve(__dirname, "../src/graphql/generated/graphql.tsx"),
+        path.resolve(__dirname, "../src/graphql/generated/graphql.tsx"),
+      ],
+      "@codegen/page": [
+        path.resolve(__dirname, "../src/graphql/generated/page.tsx"),
+        path.resolve(__dirname, "../src/graphql/generated/page.tsx"),
+      ],
+      "@decorators": [
+        path.resolve(__dirname, "./decorators/index.ts"),
+        path.resolve(__dirname, "./decorators/index.ts"),
+      ],
     };
 
     /**
