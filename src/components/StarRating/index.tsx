@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
+import starFull from "../../../public/star_full.svg";
+import starHalf from "../../../public/star_half.svg";
+import starEmpty from "../../../public/star_empty.svg";
 interface StarRatingProps {
   rating: number;
 }
@@ -33,6 +35,17 @@ export function StarRating({ rating }: StarRatingProps) {
     setStars([...newStars, ...emptyStars]);
   }
 
+  function selectImage(star: "half" | "full" | "empty") {
+    switch (star) {
+      case "full":
+        return starFull;
+      case "empty":
+        return starEmpty;
+      case "half":
+        return starHalf;
+    }
+  }
+
   useEffect(() => {
     calculateStars();
   }, [integer, decimal]);
@@ -44,7 +57,7 @@ export function StarRating({ rating }: StarRatingProps) {
           width={24}
           height={24}
           key={index}
-          src={`/star_${star}.svg`}
+          src={selectImage(star)}
           alt={`${star} star`}
         />
       ))}
