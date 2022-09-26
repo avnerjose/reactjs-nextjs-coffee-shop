@@ -7,15 +7,17 @@ interface StarRatingProps {
   rating: number;
 }
 
+type Star = "full" | "half" | "empty";
+
 export function StarRating({ rating }: StarRatingProps) {
   const [integer, decimal] = rating
     .toString()
     .split(".")
     .map((i) => parseInt(i));
-  const [stars, setStars] = useState<string[]>([]);
+  const [stars, setStars] = useState<Star[]>([]);
 
   function calculateStars() {
-    const newStars = [];
+    const newStars: Star[] = [];
 
     for (let i = 0; i < integer; i++) {
       newStars.push("full");
@@ -30,12 +32,12 @@ export function StarRating({ rating }: StarRatingProps) {
     const emptyStars = Array.from(
       { length: 5 - newStars.length },
       () => "empty"
-    );
+    ) as Star[];
 
     setStars([...newStars, ...emptyStars]);
   }
 
-  function selectImage(star: "half" | "full" | "empty") {
+  function selectImage(star: Star) {
     switch (star) {
       case "full":
         return starFull;
