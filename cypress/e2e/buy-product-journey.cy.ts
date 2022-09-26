@@ -4,6 +4,7 @@ describe("Buy a product journey test", () => {
 
     cy.contains("Catalog").click();
 
+    cy.wait(1000);
     cy.location("pathname").should("eq", "/catalog");
     cy.getByDataTest("product-item").eq(0).find("button").click();
     cy.getByDataTest("cart-link").should("contain", "1");
@@ -15,6 +16,7 @@ describe("Buy a product journey test", () => {
     cy.location("pathname").should("eq", "/checkout");
     cy.get("li").should("have.length", 4);
     cy.contains("Contacts").should("exist");
+    cy.wait(1000);
     cy.getByDataTest("first-name-input").type("John");
     cy.getByDataTest("last-name-input").type("Doe");
     cy.getByDataTest("phone-number-input").type("9999999999999");
