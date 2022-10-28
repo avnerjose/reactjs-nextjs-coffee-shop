@@ -8,7 +8,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        hero: "url('/background.png')",
+        hero: "url('/background.jpg')",
         about:
           "linear-gradient(rgba(34,32,30,.9), rgba(34,32,30,.9)), url('/background2.jpg') ",
         cart:

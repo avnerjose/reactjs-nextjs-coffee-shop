@@ -40,6 +40,9 @@
       ],
       "@decorators": [
         ".storybook/decorators/index.ts"
+      ],
+      "@animations": [
+        "src/animations/index.ts"
       ]
     }
   },
