@@ -1,5 +1,15 @@
 [![Coffee Shop CI](https://github.com/avnerjose/reactjs-nextjs-coffee-shop/actions/workflows/ci.yaml/badge.svg)](https://github.com/avnerjose/reactjs-nextjs-coffee-shop/actions/workflows/ci.yaml)
 
+<h1 align="center" widht="50%">
+  <img alt="React" width="7%" src=" https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" />
+  <img alt="React" width="7%" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
+  <img alt="TypeScript" width="7%" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" />
+  <img width="7%" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" />
+  <img alt="TypeScript" width="7%" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" />
+  <img alt="Storybook" width="7%" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg" />
+</h1>
+
+
 <h1 align="center">
   <img src="public/coffee.gif"/> 
 </h1>
