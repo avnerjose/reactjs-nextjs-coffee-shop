@@ -39,6 +39,7 @@ interface FilterContextProps {
   coffeeStrength: number | null;
   search: string;
   weight: number | null;
+  isLoading: boolean;
   setSearch: Dispatch<SetStateAction<string>>;
   setPriceLimits: Dispatch<SetStateAction<PriceLimits>>;
   setBrand: Dispatch<SetStateAction<string | null>>;
@@ -51,10 +52,13 @@ const FilterContext = createContext<FilterContextProps>(
 );
 
 function FilterProvider({ children }: FilterProviderProps) {
-  const [getProductsWithFilter, { data }] = useGetProductsWithFilterLazyQuery();
+  const [
+    getProductsWithFilter,
+    { data, loading: filterLoading },
+  ] = useGetProductsWithFilterLazyQuery();
   const [
     getProductsWithSearch,
-    { data: productsWithSearchData },
+    { data: productsWithSearchData, loading: searchLoading },
   ] = useGetAllProductsWithSearchLazyQuery();
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
@@ -65,6 +69,7 @@ function FilterProvider({ children }: FilterProviderProps) {
     min: null,
     max: null,
   });
+  const isLoading = filterLoading || searchLoading;
 
   useEffect(() => {
     getProductsWithFilter({
@@ -127,6 +132,7 @@ function FilterProvider({ children }: FilterProviderProps) {
         coffeeStrength,
         weight,
         search,
+        isLoading,
         setPriceLimits,
         setBrand,
         setCoffeeStrength,
