@@ -22,7 +22,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          npm run test:coverage --setupFiles ../../src/tests/vitest-setup.js
+          npm run test:coverage
 
       - name: Generate unit test coverage report
         uses: actions/upload-artifact@v3
