@@ -10,6 +10,7 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
+  staticDirs: ["../public"],
   env: (config) => ({
     ...config,
     NODE_ENV: "test",

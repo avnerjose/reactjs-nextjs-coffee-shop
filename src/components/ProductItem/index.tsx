@@ -25,7 +25,7 @@ export function ProductItem({
   return (
     <div
       data-test="product-item"
-      className="flex flex-col h-fit items-center shadow-md rounded-md gap-2 py-4 px-2 bg-white relative"
+      className="flex flex-col h-fit items-center shadow-md rounded-md gap-2 py-4 px-2 bg-white relative "
     >
       <img className="h-40" src={image?.url} alt={name} />
       <div className="flex items-center gap-2">
