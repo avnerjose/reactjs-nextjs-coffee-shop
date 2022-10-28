@@ -1,36 +1,60 @@
 [![Coffee Shop CI](https://github.com/avnerjose/reactjs-nextjs-coffee-shop/actions/workflows/ci.yaml/badge.svg)](https://github.com/avnerjose/reactjs-nextjs-coffee-shop/actions/workflows/ci.yaml)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <img src="public/coffee.gif"/> 
+</h1>
 
-## Getting Started
+## ⚡️ The project
+  This is an Coffee-Shop e-commerce app created with NextJS with GraphQL API integration for me to practice most of the things I learned on Front-end development.
+## 🎯 Features
+ - [x] - GraphQL api integration 
+ - [x] - Shopping cart with local storage
+ - [x] - Form validation
+ - [x] - Unit and E2E tests
+ - [x] - Full component documentation using Storybook
+ - [x] - CI with Github Actions 
+ - [ ] - Animations
+ - [ ] - Dark/Light theme
+  
+## 🖥️ Used technologies
+ - [ReactJS](https://reactjs.org/)
+ - [NextJS](https://nextjs.org/)
+ - [TailwindCSS](https://tailwindcss.com/)
+ - [React-Hook-Form](https://react-hook-form.com/)
+ - [Cypress](https://www.cypress.io/)
+ - [Vitest](https://vitest.dev/)
+ - [Storybook](https://storybook.js.org/)
+ - [Apollo Client](https://www.apollographql.com/docs/react/)
 
-First, run the development server:
+## ⚙️ Project Dependencies
+ - [Yarn](https://yarnpkg.com/)
+ 
+## 🚀️ Executando o projeto
+
+1. Clone the repository: 
 
 ```bash
-npm run dev
-# or
+git clone https://github.com/avnerjose/reactjs-nextjs-coffee-shop.git && cd reactjs-nextjs-coffee-shop
+```
+2. Install all dependencies
+
+```bash
+yarn
+```
+3. Run the app
+```bash
 yarn dev
 ```
+1. Open [localhost:3000](http://localhost:3000) to see the app running
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 🌡️ Tests 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Unit tests using Vitest
+```bash
+yarn test
+``` 
+1. E2E tests using Cypress
+```bash 
+yarn cypress
+``` 
