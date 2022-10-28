@@ -40,10 +40,17 @@ export function InputWithErrorMessage({
           rules={{
             required: true,
           }}
-          render={({ field, fieldState: { isTouched, error } }) => (
+          render={({
+            field: { ref, onBlur, onChange, value, name },
+            fieldState: { isTouched, error },
+          }) => (
             <InputMask
-              {...field}
+              onBlur={onBlur}
+              onChange={onChange}
+              value={value}
+              name={name}
               mask={mask}
+              inputRef={ref}
               className={className("w-full p-2 border border-gray-200", {
                 "border-red-500 text-red-500 outline-red-500":
                   error && isTouched,
@@ -66,6 +73,7 @@ export function InputWithErrorMessage({
           {...rest}
         />
       )}
+
       {hasError && hasTouched && (
         <span role="alert" className="text-red-500 text-sm font-light">
           {errorMessage}
