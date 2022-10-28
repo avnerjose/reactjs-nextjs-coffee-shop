@@ -6,6 +6,7 @@ import { GetAllProductsQuery } from "@codegen/graphql";
 import { getServerPageGetAllProducts, ssrGetAllProducts } from "@codegen/page";
 import { useFilter } from "@hooks";
 import { ProductItemSkeleton } from "src/components/ProductItem/ProductItemSkeleton";
+import Head from "next/head";
 
 type CatalogProps = {
   data: GetAllProductsQuery;
@@ -17,6 +18,9 @@ const Catalog: NextPage<CatalogProps> = () => {
 
   return (
     <>
+      <Head>
+        <title>Cart | Coffee-Shop</title>
+      </Head>
       <Header />
       <div className="flex bg-gray-100">
         <Filter isOpen={isFilterOpen} setIsOpen={setIsFilterOpen} />

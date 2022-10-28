@@ -13,6 +13,7 @@ import {
 } from "@components";
 import { useCart } from "@hooks";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const CheckOut: NextPage = () => {
   const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(0);
@@ -57,6 +58,9 @@ const CheckOut: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Cart | Coffee-Shop</title>
+      </Head>
       <Header isFixed />
       <SuccessfulPurchaseModal isOpen={activeStep === 4} />
       <CheckoutHero />

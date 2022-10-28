@@ -7,6 +7,7 @@ import { GetProductBySlugQuery } from "@codegen/graphql";
 import { ssrGetProductBySlug } from "@codegen/page";
 import { useCart } from "@hooks";
 import { withApollo } from "../../lib/Apollo/withApollo";
+import Head from "next/head";
 
 type ProductProps = {
   data?: GetProductBySlugQuery;
@@ -32,6 +33,9 @@ const Product: NextPage<ProductProps> = ({ data }) => {
 
   return (
     <>
+      <Head>
+        <title>{data?.product?.name} | Coffee-Shop</title>
+      </Head>
       <Header />
       <section className="max-w-screen-xl mx-auto p-8">
         <div className="flex items-center justify-center gap-16 flex-col lg:flex-row">

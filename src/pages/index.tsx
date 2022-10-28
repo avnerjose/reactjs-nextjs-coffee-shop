@@ -8,10 +8,14 @@ import {
   Popular,
   Stats,
 } from "@components";
+import Head from "next/head";
 
 const HomePage: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>Home | Coffee-Shop</title>
+      </Head>
       <Header isFixed />
       <HeroSection />
       <AboutUs />
