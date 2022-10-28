@@ -16,7 +16,7 @@ export function HeroSection() {
           variants={slideFromTop}
           transition={{ duration: 0.5 }}
           data-test="hero-heading"
-          className="font-title text-white font-bold text-7xl"
+          className="font-title text-white font-bold md:text-7xl text-5xl text-center md:text-left"
         >
           Start your day with a black coffee
         </motion.h1>
@@ -26,7 +26,7 @@ export function HeroSection() {
           whileInView="visible"
           variants={parent}
           transition={{ duration: 0.5 }}
-          className="flex flex-col self-start py-2 gap-2"
+          className="flex flex-col items-center md:items-start self-start py-2 gap-2"
         >
           <motion.div
             initial="hidden"
@@ -45,7 +45,7 @@ export function HeroSection() {
             variants={childSlideFromLeft}
             custom={1}
             data-test="hero-description"
-            className="text-white"
+            className="text-white text-center md:text-left"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
             deleniti modi corrupti, adipisci rem temporibus.

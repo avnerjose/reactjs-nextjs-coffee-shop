@@ -27,7 +27,7 @@ export function Stats() {
         initial="hidden"
         whileInView="visible"
         variants={parent}
-        className="flex"
+        className="grid grid-cols-2 md:flex"
       >
         {STATS_INFO.map(({ label, amount }, index) => (
           <motion.li

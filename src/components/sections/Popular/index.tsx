@@ -6,7 +6,7 @@ export function Popular() {
     >
       <h2
         data-test="popular-heading"
-        className="font-title text-4xl text-dark uppercase"
+        className="font-title text-3xl md:text-4xl text-dark uppercase"
       >
         Popular Products
       </h2>

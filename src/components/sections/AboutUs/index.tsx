@@ -13,7 +13,7 @@ export function AboutUs() {
           whileInView="visible"
           variants={slideFromTop}
           data-test="about-heading"
-          className="font-title text-4xl uppercase"
+          className="font-title text-3xl md:text-4xl uppercase"
         >
           About Us
         </motion.h2>
