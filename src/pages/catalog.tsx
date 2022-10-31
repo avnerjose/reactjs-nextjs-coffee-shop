@@ -5,7 +5,7 @@ import { withFilter } from "@contexts";
 import { GetAllProductsQuery } from "@codegen/graphql";
 import { getServerPageGetAllProducts, ssrGetAllProducts } from "@codegen/page";
 import { useFilter } from "@hooks";
-import { ProductItemSkeleton } from "src/components/ProductItem/ProductItemSkeleton";
+import { ProductItemSkeleton } from "src/components/Skeletons/ProductItem/ProductItemSkeleton";
 import Head from "next/head";
 
 type CatalogProps = {

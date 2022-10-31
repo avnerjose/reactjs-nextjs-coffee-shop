@@ -19,6 +19,7 @@ export default defineConfig({
         __dirname,
         "src/graphql/generated/page.tsx"
       ),
+      "@animations": path.resolve(__dirname, "src/animations/index.ts"),
     },
   },
   test: {
@@ -38,6 +39,8 @@ export default defineConfig({
         "src/hooks/useScroll.ts",
         "src/pages/_app.tsx",
         "src/pages/_document.tsx",
+        "src/**/**.stories.tsx",
+        "src/components/Skeletons/**"
       ],
       include: ["src/"],
     },
