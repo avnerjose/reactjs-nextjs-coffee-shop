@@ -2,8 +2,9 @@ import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useScroll, useCart, useFilter } from "@hooks";
-import { ShoppingCart } from "phosphor-react";
+import { List, ShoppingCart, X } from "phosphor-react";
 import { useRouter } from "next/router";
+import { MobileMenu } from "./MobileMenu";
 
 interface HeaderProps {
   isFixed?: boolean;
@@ -11,6 +12,7 @@ interface HeaderProps {
 
 export function Header({ isFixed = false }: HeaderProps) {
   const [isHeaderTransparent, setIsHeaderTransparent] = useState(isFixed);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { asPath } = useRouter();
   const { setSectionToScroll } = useScroll();
   const { search, setSearch } = useFilter();
@@ -35,14 +37,28 @@ export function Header({ isFixed = false }: HeaderProps) {
   return (
     <header
       data-testid="header"
-      className={classNames("transition-colors h-14", {
+      className={classNames("flex transition-colors h-14", {
         "fixed top-0 left-0 right-0 z-10": isFixed,
-        "bg-black bg-opacity-[0.3] shadow-sm ": isHeaderTransparent,
-        "bg-dark shadow-md": !isHeaderTransparent,
+        "bg-dark shadow-md": !isHeaderTransparent || isMobileMenuOpen,
+        "bg-black bg-opacity-[0.3] shadow-sm ":
+          isHeaderTransparent && !isMobileMenuOpen,
       })}
     >
+      <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
+
       <div className="flex w-full items-center justify-between max-w-screen-xl mx-auto px-3 ">
-        <nav className="flex gap-8 text-white font-title py-4">
+        {isMobileMenuOpen ? (
+          <X
+            className="block md:hidden text-xl text-white"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        ) : (
+          <List
+            className="block md:hidden text-xl text-white"
+            onClick={() => setIsMobileMenuOpen(true)}
+          />
+        )}
+        <nav className="hidden md:flex gap-8 text-white font-title py-4">
           <NextLink href="/">
             <a onClick={() => setSectionToScroll("hero")}>Home</a>
           </NextLink>
